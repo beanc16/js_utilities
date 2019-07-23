@@ -5,8 +5,10 @@ A small library of utilities for vanilla JavaScript &amp; Node.js
 
 ## ALL CDNS
 
-### CDN Template:
+<!---
+CDN Template:
 https://cdn.jsdelivr.net/gh/beanc16/js_utilities@version/folder/file.js
+-->
 
 ### Dom CDN:
 https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/dom/dom_utilities.js
