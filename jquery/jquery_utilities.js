@@ -13,8 +13,9 @@
 
 /**
  * runOnDocumentReady
- * @summary PASS ALL PARAMETERS TO THIS FUNCTION AS:
- *          () => functionName(parameters)
+ * Summary. 	Run each given function when the page is loaded.
+ * Description. PASS ALL PARAMETERS TO THIS FUNCTION AS:
+ *          	() => functionName(parameters)
  *
  * @param {function} functions
  */
@@ -34,11 +35,12 @@ function runOnDocumentReady(...functions)
 
 /**
  * preventPageRefresh
- * @summary Place this in a $(document).ready function to 
- * 			prevent the page from refreshing when the 
- * 			element(s) with the given tag are submitted.
- * 			If no tag is given, it prevents forms from 
- * 			refreshing by default.
+ * Summary. 	Prevent the page from refreshing on an element submit.
+ * Description. Place this in a $(document).ready function to 
+ * 				prevent the page from refreshing when the 
+ * 				element(s) with the given tag are submitted.
+ * 				If no tag is given, it prevents forms from 
+ * 				refreshing by default.
  * @param {string} formTag
  */
 function preventPageRefresh(formTag)
@@ -76,10 +78,9 @@ function preventPageRefresh(formTag)
 
 /**
  * setHtml
- * @summary Set the display of the HTML element with the 
- * 			given tag.
+ * Summary. Set the display of the HTML element with the given tag.
  * @param {string} tag
- * @param display
+ * @param          display
  */
 function setHtml(tag, display)
 {
@@ -89,8 +90,7 @@ function setHtml(tag, display)
 
 /**
  * clearHtml
- * @summary Clear the display of the HTML element with the 
- * 			given tag.
+ * Summary. Clear the display of the HTML element with the given tag.
  * @param {string} tag
  */
 function clearHtml(tag)
@@ -101,9 +101,8 @@ function clearHtml(tag)
 
 /**
  * enableHtmlElement
- * @summary Enable or disable the HTML element with the 
- * 			given tag.
- * @param {string} tag
+ * Summary. Enable or disable the HTML element with the given tag.
+ * @param {string}  tag
  * @param {boolean} shouldEnable
  */
 function enableHtmlElement(tag, shouldEnable)
@@ -114,9 +113,8 @@ function enableHtmlElement(tag, shouldEnable)
 
 /**
  * disableHtmlElement
- * @summary Enable or disable the HTML element with the 
- * 			given tag.
- * @param {string} tag
+ * Summary. Enable or disable the HTML element with the given tag.
+ * @param {string}  tag
  * @param {boolean} shouldDisable
  */
 function disableHtmlElement(tag, shouldDisable)
@@ -135,9 +133,9 @@ function disableHtmlElement(tag, shouldDisable)
 
 /**
  * runOnClick
- * @summary Run the given function when the element with 
- * 			the given tag is clicked.
- * @param {string} tag
+ * Description. Run the given function when the element with the given 
+ * 				tag is clicked.
+ * @param {string}   tag
  * @param {function} func
  */
 function runOnClick(tag, func)
@@ -152,10 +150,10 @@ function runOnClick(tag, func)
 
 /**
  * runOnClickWithEvent
- * @summary Run the given function (with the event passed 
- * 			as a parameter) when the element with the 
- * 			given tag is clicked.
- * @param {string} tag
+ * Description. Run the given function (with the event passed as a 
+ * 				parameter) when the element with the given tag is 
+ * 				clicked.
+ * @param {string}   tag
  * @param {function} func (recommend using an anonymous function)
  */
 function runOnClickWithEvent(tag, func)
@@ -170,8 +168,8 @@ function runOnClickWithEvent(tag, func)
 
 /**
  * disableClickFunctionality
- * @summary Disable the element with the given tag from 
- * 			doing anything when clicked.
+ * Description. Disable the element with the given tag from doing 
+ * 				anything when clicked.
  * @param {string} tag
  */
 function disableClickFunctionality(tag)

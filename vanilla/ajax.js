@@ -1,10 +1,9 @@
 /**
  * sendAjaxRequest
- * @summary Send an ajax get or post request with the 
- * 			given parameters.
- * @param {string} data
- * @param {string} requestType
- * @param {string} url
+ * Summary. Send an ajax get or post request with the given parameters.
+ * @param {string}   data
+ * @param {string}   requestType
+ * @param {string}   url
  * @param {function} successCallback
  */
 function sendAjaxRequest(data, requestType, url, successCallback)
@@ -39,9 +38,9 @@ function sendAjaxRequest(data, requestType, url, successCallback)
 
 /**
  * sendGetRequest
- * @summary A helper function for sendAjaxRequest(). 
- * 			It's highly recommended that you don't call
- * 			this function in your code.
+ * Description. A helper function for sendAjaxRequest(). It's highly 
+ * 				recommended that you don't call this function in your 
+ * 				code.
  * @param xhttp
  * @param {string} data
  * @param {string} requestType
@@ -75,9 +74,9 @@ function sendGetRequest(xhttp, data, requestType, url)
 
 /**
  * sendPostRequest
- * @summary A helper function for sendAjaxRequest(). 
- * 			It's highly recommended that you don't call
- * 			this function in your code.
+ * Description. A helper function for sendAjaxRequest(). It's highly 
+ * 				recommended that you don't call this function in your 
+ * 				code.
  * @param xhttp
  * @param {string} data
  * @param {string} requestType
