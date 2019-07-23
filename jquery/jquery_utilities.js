@@ -1,3 +1,12 @@
+/* 
+ * In order for this code to work, you must have jQuery on the same 
+ * page that is using this library. You can find an up-to-date 
+ * version of jQuery here:
+ * https://code.jquery.com
+ */
+
+
+
 /***********
  * GENERAL *
  ***********/
