@@ -1,8 +1,10 @@
 /**
  * sendAjaxRequest
- * @param {String} data
- * @param {String} requestType
- * @param {String} url
+ * @summary Send an ajax get or post request with the 
+ * 			given parameters.
+ * @param {string} data
+ * @param {string} requestType
+ * @param {string} url
  * @param {function} successCallback
  */
 function sendAjaxRequest(data, requestType, url, successCallback)
@@ -37,10 +39,13 @@ function sendAjaxRequest(data, requestType, url, successCallback)
 
 /**
  * sendGetRequest
+ * @summary A helper function for sendAjaxRequest(). 
+ * 			It's highly recommended that you don't call
+ * 			this function in your code.
  * @param xhttp
- * @param {String} data
- * @param {String} requestType
- * @param {String} url
+ * @param {string} data
+ * @param {string} requestType
+ * @param {string} url
  */
 function sendGetRequest(xhttp, data, requestType, url)
 {
@@ -70,10 +75,13 @@ function sendGetRequest(xhttp, data, requestType, url)
 
 /**
  * sendPostRequest
+ * @summary A helper function for sendAjaxRequest(). 
+ * 			It's highly recommended that you don't call
+ * 			this function in your code.
  * @param xhttp
- * @param {String} data
- * @param {String} requestType
- * @param {String} url
+ * @param {string} data
+ * @param {string} requestType
+ * @param {string} url
  */
 function sendPostRequest(xhttp, data, requestType, url)
 {
