@@ -1,1 +1,5 @@
+title: js_utilities
+description: A small library of utilities for vanilla JavaScript & Node.js.
+show_downloads: true
+google_analytics:
 theme: jekyll-theme-tactile
