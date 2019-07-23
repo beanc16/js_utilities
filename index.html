@@ -6,13 +6,22 @@
     <meta charset="UTF-8">
     <title>js_utilities</title>
 
-	<!-- Libraries -->
+	<!-- JS Libraries -->
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-		
-	<!-- CSS -->
+	<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/js/bootstrap4-toggle.min.js"></script>
+	
+	<!-- js_utilities Libraries-->
+	<script src="https://cdn.jsdelivr.net/gh/beanc16/js_utilities@latest/vanilla/vanilla_utilities.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/beanc16/js_utilities@latest/jquery/jquery_utilities.js"></script>
+	
+	<!-- CSS Libraries -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/css/bootstrap4-toggle.min.css">
+
+	
+	<!-- CSS -->
 	<link rel="stylesheet" href="./assets/css/index.css">
 	
 	<!-- JavaScript -->
@@ -30,48 +39,85 @@
 	CDN Template:
 	https://cdn.jsdelivr.net/gh/beanc16/js_utilities@version/folder/file.js
 	-->
+	
+	<form id="form">
+			<!-- Do version range and specific versions (IE: 0.0.1, 1.0.0, 0.2, 1, latest version (not recommended for production)) -->
+			<!-- 
+			Sample combined file
+			https://cdn.jsdelivr.net/combine/gh/beanc16/js_utilities@0.0.1/vanilla/validation.js,gh/beanc16/js_utilities@0.0.1/vanilla/vanilla_ajax.js
+			-->
+		<!-- Options -->
+		<!--
+		<div id="optionsDiv">
+			<h3 class="text-primary">Options</h3>
+			<input type="checkbox" checked data-toggle="toggle" data-on="Get full CDN" data-off="Get href"
+																data-onstyle="primary" data-offstyle="secondary">
+			<input type="checkbox" checked data-toggle="toggle" data-on="Just One CDN" data-off="Separate CDNs" 
+																data-onstyle="primary" data-offstyle="secondary">
+		</div
+		<br />
+		<br />
+		<br />
+		-->
+	
+		<!-- CDNs -->
+		<div id="cdnsDiv">
+			<div>
+				<h3 class="text-primary">Dom CDN</h3>
+				<div class="custom-control custom-checkbox custom-control-inline">
+					<input type="checkbox" class="custom-control-input" id="checkDomUtilities">
+					<label class="custom-control-label text-info" for="checkDomUtilities">Dom Utilities</label>
+				</div>
+			</div>
+			<br />
 
-	<h3 class="text-primary">Dom CDN</h2>
+			<div>
+				<h3 class="text-primary">jQuery CDN</h3>
+				<div class="custom-control custom-checkbox custom-control-inline">
+					<input type="checkbox" class="custom-control-input" id="checkJqueryUtilities">
+					<label class="custom-control-label text-info" for="checkJqueryUtilities">jQuery Utilities</label>
+				</div>
+			</div>
+			<br />
 
-	<a class="text-info" href="https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/dom/dom_utilities.js">
-		https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/dom/dom_utilities.js
-	</a>
+			<div>
+				<h3 class="text-primary">Node CDN</h3>
+				<div class="custom-control custom-checkbox custom-control-inline">
+					<input type="checkbox" class="custom-control-input" id="checkNodeAjax">
+					<label class="custom-control-label text-info" for="checkNodeAjax">Node Ajax</label>
+				</div>
+			</div>
+			<br />
 
+			<div>
+				<h3 class="text-primary">Vanilla CDN</h3>
 
-	<h3 class="text-primary">jQuery CDN</h2>
-
-	<a class="text-info" href="https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/jquery/jquery_utilities.js">
-		https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/jquery/jquery_utilities.js
-	</a>
-
-
-	<h3 class="text-primary">Node CDN</h2>
-
-	<a class="text-info" href="https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/node/node_ajax.js">
-		https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/node/node_ajax.js
-	</a>
-
-
-	<h3 class="text-primary">Vanilla CDN</h2>
-
-	<a class="text-info" href="https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/vanilla/arrays.js">
-		https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/vanilla/arrays.js
-	</a>
+				<div class="custom-control custom-checkbox custom-control-inline">
+					<input type="checkbox" class="custom-control-input" id="checkVanillaArrays">
+					<label class="custom-control-label text-info" for="checkVanillaArrays">Arrays</label>
+				</div>
+				<div class="custom-control custom-checkbox custom-control-inline">
+					<input type="checkbox" class="custom-control-input" id="checkVanillaValidation">
+					<label class="custom-control-label text-info" for="checkVanillaValidation">Validation</label>
+				</div>
+				<div class="custom-control custom-checkbox custom-control-inline">
+					<input type="checkbox" class="custom-control-input" id="checkVanillaAjax">
+					<label class="custom-control-label text-info" for="checkVanillaAjax">Vanilla Ajax</label>
+				</div>
+				<div class="custom-control custom-checkbox custom-control-inline">
+					<input type="checkbox" class="custom-control-input" id="checkVanillaUtilities">
+					<label class="custom-control-label text-info" for="checkVanillaUtilities">Vanilla Utilities</label>
+				</div>
+			</div>
+		</div>
+		<br />
+		
+		<button type="button" class="btn btn-primary" id="submitButton">Submit</button>
+	</form>
 	<br />
-
-	<a class="text-info" href="https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/vanilla/validation.js">
-		https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/vanilla/validation.js
-	</a>
-	<br />
-
-	<a class="text-info" href="https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/vanilla/vanilla_ajax.js">
-		https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/vanilla/vanilla_ajax.js
-	</a>
-	<br />
-
-	<a class="text-info" href="https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/vanilla/vanilla_utilities.js">
-		https://cdn.jsdelivr.net/gh/beanc16/js_utilities@0.0.1/vanilla/vanilla_utilities.js
-	</a>
+		
+	<div id="displayArea">
+	</div>
 </div>
 
 </body>
