@@ -5,7 +5,7 @@ runOnDocumentReady(
 	// Prevent the page from refreshing when the form is submitted
 	() => preventPageRefresh(),
 	
-	// ?
+	// Add submit button click functionality
 	() => runOnClick("#submitButton", () => onSubmitButtonClick())
 );
 
@@ -24,7 +24,8 @@ let path = "";
 let optionsArray = [
 
 	// idOnHtmlPage
-	"checkOptionsCombine"
+	"toggleGetCdn",
+	"toggleCombineCdns"
 ];
 
 // Track all CDN files
@@ -59,6 +60,7 @@ function onSubmitButtonClick()
 	
 	if (selectedIds != null)
 	{
+		let allOptions = getAllOptions(selectedIds);
 		let allCdns = getAllCdns(selectedIds);
 		//console.log(allCdns)
 		
@@ -116,7 +118,7 @@ function getAllCdns(selectedIds)
 		// Test which path goes with the selectedId
 		for (let key in cdnObj)
 		{
-			if (key = selectedIds[i])
+			if (key == selectedIds[i])
 			{
 				// Set the currentPath
 				currentPath = cdnObj[key];
@@ -139,6 +141,52 @@ function getFullCdn(currentPath)
 	let cdn = baseCdn + version + "/" + currentPath;
 	
 	return cdn;
+}
+
+function getAllOptions(selectedIds)
+{
+	// Helper variables
+	let allOptions = {};
+	
+	// Loop over each selectedId
+	for (let i = 0; i < selectedIds.length; i++)
+	{
+		// The selectedId is an option
+		if (selectedIds[i].includes("toggle"))
+		{
+			// Test which option goes with the selectedId
+			for (let j = 0; j < optionsArray.length; j++)
+			{
+				// The current option (id) WAS selected
+				if (optionsArray[j] == selectedIds[i])
+				{
+					allOptions[ optionsArray[j] ] = true;
+					continue;					
+				}
+				
+				// The current option (id) WAS NOT selected
+				else
+				{
+					if (allOptions[ optionsArray[j] ] == null)	// Don't override a "true" value
+					{
+						allOptions[ optionsArray[j] ] = false;
+					}
+				}
+			}	
+		}
+	}
+	
+	// All options were turned off
+	if (Object.entries(allOptions).length === 0)
+	{
+		// Set all options to false
+		for (let j = 0; j < optionsArray.length; j++)
+		{
+			allOptions[ optionsArray[j] ] = false;
+		}
+	}
+	
+	return allOptions;
 }
 
 
