@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -13,8 +13,8 @@
 	<script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.5.0/js/bootstrap4-toggle.min.js"></script>
 	
 	<!-- js_utilities Libraries-->
-	<script src="https://cdn.jsdelivr.net/gh/beanc16/js_utilities@latest/vanilla/vanilla_utilities.js"></script>
 	<script src="https://cdn.jsdelivr.net/gh/beanc16/js_utilities@latest/jquery/jquery_utilities.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/beanc16/js_utilities@latest/vanilla/vanilla_utilities.js"></script>
 	
 	<!-- CSS Libraries -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -48,18 +48,17 @@
 																								^ comma here; start next file at "gh"
 			-->
 		<!-- Options -->
-		<!--
 		<div id="optionsDiv">
 			<h3 class="text-primary">Options</h3>
-			<input type="checkbox" checked data-toggle="toggle" data-on="Get CDN" data-off="Get href" id="toggleGetCdn"
+			<input type="checkbox" checked data-toggle="toggle" data-on="Get CDN" data-off="Get SRC link" id="toggleGetCdn"
 																data-onstyle="primary" data-offstyle="secondary">
+			<!--
 			<input type="checkbox" checked data-toggle="toggle" data-on="Combine CDNs" data-off="Separate CDNs" id="toggleCombineCdns"
 																data-onstyle="primary" data-offstyle="secondary">
-		</div
+			-->
+		</div>
 		<br />
 		<br />
-		<br />
-		-->
 	
 		<!-- CDNs -->
 		<div id="cdnsDiv">
@@ -119,6 +118,8 @@
 		
 	<div id="displayArea">
 	</div>
+	<pre id="codeArea">
+	</pre>
 </div>
 
 </body>

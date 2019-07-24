@@ -21,12 +21,18 @@ let version = "latest";
 let path = "";
 
 // Track all options
-let optionsArray = [
+let optionsDictionary = {
 
 	// idOnHtmlPage
-	"toggleGetCdn",
-	"toggleCombineCdns"
-];
+	"toggleGetCdn": {
+		true: displayCdns,
+		false: displaySrcLinks
+	},
+	"toggleCombineCdns": {
+		true: "true",
+		false: "false"
+	}
+};
 
 // Track all CDN files
 let cdnObj = {
@@ -53,28 +59,20 @@ let cdnObj = {
 
 function onSubmitButtonClick()
 {
-	let selectedIds = getSelectedCheckboxesId();;
-		
+	// Get & clear the display areas
 	let displayArea = document.getElementById("displayArea");
+	let codeArea = document.getElementById("codeArea");
 	displayArea.innerHTML = "";
+	codeArea.innerHTML = "";
 	
+	// Get the IDs of the selected options & CDNs
+	let selectedIds = getSelectedCheckboxesId();
+	
+	// If options were selected, run them based on the selected options
 	if (selectedIds != null)
 	{
 		let allOptions = getAllOptions(selectedIds);
-		let allCdns = getAllCdns(selectedIds);
-		//console.log(allCdns)
-		
-		for (let i = 0; i < allCdns.length; i++)
-		{
-			let a = getAnchorElement(allCdns[i]);
-			displayArea.appendChild(a);
-			
-			if (allCdns.length - 1 != i)
-			{
-				let br = getBrElement();
-				displayArea.appendChild(br);
-			}
-		}
+		runFunctionsFromOptions(allOptions, selectedIds);
 	}
 }
 
@@ -106,7 +104,104 @@ function getSelectedCheckboxesId()
 	}
 }
 
-function getAllCdns(selectedIds)
+function getAllOptions(selectedIds)
+{
+	// Helper variables
+	let allOptions = {};
+	
+	// Loop over each selectedId
+	for (let i = 0; i < selectedIds.length; i++)
+	{
+		// The selectedId is an option
+		if (selectedIds[i].includes("toggle"))
+		{			
+			// Test which option goes with the selectedId
+			for (let key in optionsDictionary)
+			{				
+				// The current option (id) WAS selected
+				if (key == selectedIds[i])
+				{
+					allOptions[key] = true;
+					continue;					
+				}
+				
+				// The current option (id) WAS NOT selected
+				else
+				{
+					if (allOptions[key] == null)	// Don't override a "true" value
+					{
+						allOptions[key] = false;
+					}
+				}
+			}	
+		}
+	}
+	
+	// All options were turned off
+	if (Object.entries(allOptions).length === 0)
+	{
+		// Set all options to false
+		for (let key in optionsDictionary)
+		{
+			allOptions[key] = false;
+		}
+	}
+	//console.log(allOptions);	
+	
+	return allOptions;
+}
+
+function runFunctionsFromOptions(allOptions, selectedIds)
+{
+	// Loop over each final option
+	for (let option in allOptions)
+	{
+		// Loop over each option in the dictionary
+		for (let key in optionsDictionary)
+		{
+			if (option == key)
+			{
+				let optionsDictionaryValue = optionsDictionary[key];
+				
+				for (let boolValue in optionsDictionaryValue)
+				{
+					if (boolValue == allOptions[option].toString())
+					{
+						if (typeof optionsDictionaryValue[boolValue] == "function")
+						{
+							optionsDictionaryValue[boolValue](selectedIds);
+						}
+					}
+				}
+			}
+		}
+	}	
+}
+
+
+
+function displaySrcLinks(selectedIds)
+{
+	let displayArea = document.getElementById("displayArea");
+	
+	// Run the given function to get what should be displayed
+	let allSrcLinks = getAllSrcLinks(selectedIds);
+	
+	// Add each element that should be displayed to the 
+	for (let i = 0; i < allSrcLinks.length; i++)
+	{
+		let a = getAnchorElement(allSrcLinks[i]);
+		displayArea.appendChild(a);
+		
+		if (allSrcLinks.length - 1 != i)
+		{
+			let br = getBrElement();
+			displayArea.appendChild(br);
+		}
+	}
+}
+
+function getAllSrcLinks(selectedIds)
 {
 	// Helper variables
 	let allCdns = [];
@@ -124,7 +219,7 @@ function getAllCdns(selectedIds)
 				currentPath = cdnObj[key];
 				
 				// Convert to full CDN
-				currentCdn = getFullCdn(currentPath);
+				currentCdn = getFullSrcLink(currentPath);
 				
 				// Add the CDN to the list of all CDNs
 				allCdns.push(currentCdn);
@@ -132,70 +227,82 @@ function getAllCdns(selectedIds)
 			}
 		}
 	}
+	//console.log(allCdns);
 	
 	return allCdns;
 }
 
-function getFullCdn(currentPath)
+function getFullSrcLink(currentPath)
 {
 	let cdn = baseCdn + version + "/" + currentPath;
 	
 	return cdn;
 }
 
-function getAllOptions(selectedIds)
+function displayCdns(selectedIds)
 {
-	// Helper variables
-	let allOptions = {};
+	let codeArea = document.getElementById("codeArea");
 	
-	// Loop over each selectedId
-	for (let i = 0; i < selectedIds.length; i++)
+	// Run the given function to get what should be displayed
+	let allSrcLinks = getAllSrcLinks(selectedIds);
+	//console.log(allSrcLinks);
+	
+	// Add each element that should be displayed to the 
+	for (let i = 0; i < allSrcLinks.length; i++)
 	{
-		// The selectedId is an option
-		if (selectedIds[i].includes("toggle"))
+		let script = getScriptElement(allSrcLinks[i]);
+		let cdn = getCodeElement(script.outerHTML);
+		codeArea.appendChild(cdn);
+		
+		if (allSrcLinks.length - 1 != i)
 		{
-			// Test which option goes with the selectedId
-			for (let j = 0; j < optionsArray.length; j++)
-			{
-				// The current option (id) WAS selected
-				if (optionsArray[j] == selectedIds[i])
-				{
-					allOptions[ optionsArray[j] ] = true;
-					continue;					
-				}
-				
-				// The current option (id) WAS NOT selected
-				else
-				{
-					if (allOptions[ optionsArray[j] ] == null)	// Don't override a "true" value
-					{
-						allOptions[ optionsArray[j] ] = false;
-					}
-				}
-			}	
+			let br = getBrElement();
+			codeArea.appendChild(br);
 		}
 	}
-	
-	// All options were turned off
-	if (Object.entries(allOptions).length === 0)
-	{
-		// Set all options to false
-		for (let j = 0; j < optionsArray.length; j++)
-		{
-			allOptions[ optionsArray[j] ] = false;
-		}
-	}
-	
-	return allOptions;
 }
 
 
+
+function getCodeElement(displayText)
+{
+	let code = document.createElement("code");
+	code.className = "txt-white";
+	
+	displayText = convertToCodeText(displayText);
+	code.innerHTML = displayText;
+	
+	return code;
+}
+
+function convertToCodeText(str)
+{
+	while (str.includes("<"))
+	{
+		str = str.replace("<", "&lt;");
+	}
+	
+	while (str.includes(">"))
+	{
+		str = str.replace(">", "&gt;");
+	}
+	
+	return str;
+}
+
+function getScriptElement(src)
+{
+	let script = document.createElement("script");
+	script.src = src;
+	
+	return script;
+}
 
 function getAnchorElement(href)
 {
 	let a = document.createElement("a");
 	a.href = href;
-	a.className = "text-info";
+	a.className = "text-info";	// For bootstrap color
 	a.innerHTML = href;
 	
 	return a;
