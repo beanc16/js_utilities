@@ -29,8 +29,8 @@ let optionsDictionary = {
 		false: displaySrcLinks
 	},
 	"toggleCombineCdns": {
-		true: "true",
-		false: "false"
+		true: "true"/*displayCombinedSrcLink*/,
+		false: "false"//displayCombinedCdn
 	}
 };
 
@@ -184,7 +184,7 @@ function displaySrcLinks(selectedIds)
 {
 	let displayArea = document.getElementById("displayArea");
 	
-	// Run the given function to get what should be displayed
+	// Get what should be displayed
 	let allSrcLinks = getAllSrcLinks(selectedIds);
 	
 	// Add each element that should be displayed to the 
@@ -239,13 +239,84 @@ function getFullSrcLink(currentPath)
 	return cdn;
 }
 
+function displayCombinedSrcLink(selectedIds)
+{
+	let displayArea = document.getElementById("displayArea");
+	
+	// Get all paths
+	let allPaths = getAllPathsForCombinedLink(selectedIds);
+	
+	if (allPaths.length != 0)
+	{
+		let combinedLink = getCombinedSrcLink(allPaths);
+	
+		// Set the combined link as an element to display
+		let a = getAnchorElement(combinedLink);
+		displayArea.appendChild(a);
+	}
+}
+
+function getAllPathsForCombinedLink(selectedIds)
+{
+	let allPaths = [];
+	
+	// Add each selected path to the array of allPaths
+	for (let i = 0; i < selectedIds.length; i++)
+	{
+		for (let key in cdnObj)
+		{
+			// Test which path goes with the current selectedId
+			if (key == selectedIds[i])
+			{
+				currentPath = cdnObj[key];
+				
+				allPaths.push(currentPath);
+				break;
+			}
+		}
+	}
+	
+	return allPaths;
+}
+
+function getCombinedSrcLink(allPaths)
+{
+	/*
+	 * Sample combined file:
+	 * https://cdn.jsdelivr.net/combine/
+	 * gh/beanc16/js_utilities@0.0.1/vanilla/validation.js,
+	 * 													  ^ comma here; start next file at "gh"
+	 * gh/beanc16/js_utilities@0.0.1/vanilla/vanilla_ajax.js
+	 */
+	
+	let baseCombinedCdn = "https://cdn.jsdelivr.net/combine/";
+	let combinedCdnAddon = "gh/beanc16/js_utilities@";
+	
+	let cdn = baseCombinedCdn;
+	
+	for (let i = 0; i < allPaths.length; i++)
+	{
+		// There's one file in the combination already
+		if (i != 0)
+		{
+			// Add a comma to separate the files
+			cdn += ",";
+		}
+		
+		cdn += combinedCdnAddon + version + "/" + allPaths[i];
+	}
+	
+	return cdn;
+}
+
+
+
 function displayCdns(selectedIds)
 {
 	let codeArea = document.getElementById("codeArea");
 	
-	// Run the given function to get what should be displayed
+	// Get what should be displayed
 	let allSrcLinks = getAllSrcLinks(selectedIds);
-	//console.log(allSrcLinks);
 	
 	// Add each element that should be displayed to the 
 	for (let i = 0; i < allSrcLinks.length; i++)
@@ -262,12 +333,27 @@ function displayCdns(selectedIds)
 	}
 }
 
+function displayCombinedCdn(selectedIds)
+{
+	let codeArea = document.getElementById("codeArea");
+	
+	// Get all paths
+	let allPaths = getAllPathsForCombinedLink(selectedIds);
+	
+	// Get what should be displayed
+	let combinedLink = getCombinedSrcLink(allPaths);
+	
+	let script = getScriptElement(combinedLink);
+	let cdn = getCodeElement(script.outerHTML);
+	codeArea.appendChild(cdn);
+}
+
 
 
 function getCodeElement(displayText)
 {
 	let code = document.createElement("code");
-	code.className = "txt-white";
+	code.className = "txt-white";	// For CSS styling
 	
 	displayText = convertToCodeText(displayText);
 	code.innerHTML = displayText;
