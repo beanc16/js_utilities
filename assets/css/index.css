@@ -6,8 +6,33 @@ body {
 }
 
 #containerDiv {
-	height: 100%;
-	width: 100%;
+	height: 100vh;
+	width: 100vw;
+}
+
+.leftContainer {
+	float: left;
+	
+	margin-left: 2vw;
+	width: 36vw;
+	
+	margin-top: 2vh;
+	height: 98vh;
+}
+
+.rightContainer {
+	float: right;
+	word-wrap: break-word;
+	
+	margin-right: 2vw;
+	width: 56vw;
+	
+	margin-top: 2vh;
+	height: 98vh;
+}
+
+#codeArea {
+	word-wrap: break-word;
 }
 
 .txt-white {

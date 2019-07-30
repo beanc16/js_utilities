@@ -40,107 +40,108 @@
 	https://cdn.jsdelivr.net/gh/beanc16/js_utilities@version/folder/file.js
 	-->
 	
-	<form id="form">
-		<!-- Options -->
-		<div id="optionsDiv">
-		
-			<!-- Header -->
-			<h3 class="text-primary">Options</h3>
+	<div class="leftContainer">
+		<form id="form">
+			<!-- Options -->
+			<div id="optionsDiv">
 			
-			<!-- Get CDN/SRC -->
-			<input type="checkbox" checked data-toggle="toggle" data-on="Get CDN" data-off="Get SRC link" id="toggleGetCdn"
-																data-onstyle="primary" data-offstyle="secondary">
-																
-			<!-- Combine/Uncombine CDN -->
-			<input type="checkbox" checked data-toggle="toggle" data-on="Combine CDNs" data-off="Separate CDNs" id="toggleCombineCdns"
-																data-onstyle="primary" data-offstyle="secondary">
-																
-			<!-- Version Dropdown -->
-			<div class="btn-group">
-				<button type="button" class="btn btn-primary dropdown-toggle" id="dropdownVersionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Version
-			    </button>
-			    <div class="dropdown-menu">
-					<a class="dropdown-item">0.0.1</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item">latest (not recommended for production)</a>
-			    </div>
+				<!-- Header -->
+				<h3 class="text-primary">Options</h3>
+				
+				<!-- Get CDN/SRC -->
+				<input type="checkbox" checked data-toggle="toggle" data-on="Get CDN" data-off="Get SRC link" id="toggleGetCdn"
+																	data-onstyle="primary" data-offstyle="secondary">
+																	
+				<!-- Combine/Uncombine CDN -->
+				<input type="checkbox" checked data-toggle="toggle" data-on="Combine CDNs" data-off="Separate CDNs" id="toggleCombineCdns"
+																	data-onstyle="primary" data-offstyle="secondary">
+																	
+				<!-- Version Dropdown -->
+				<div class="btn-group">
+					<button type="button" class="btn btn-primary dropdown-toggle" id="dropdownVersionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Version
+					</button>
+					<div class="dropdown-menu">
+						<a class="dropdown-item">0.0.1</a>
+						<div class="dropdown-divider"></div>
+						<a class="dropdown-item">latest (not recommended for production)</a>
+					</div>
+				</div>
+				
 			</div>
-			
-		</div>
-		<br />
-		<br />
-	
-									
-		<!-- Select/Deselect All -->
-		<div>
-			<h3 class="text-primary">Quick Select</h3>
-			
-			<button type="button" class="btn btn-primary" id="btnSelectAll">Select All</button>
-			<button type="button" class="btn btn-primary" id="btnDeselectAll">Deselect All</button>
-		</div>
-		<br />
-			
-		<!-- CDN Checkboxes -->
-		<div id="cdnsDiv">
+			<br />
+		
+										
+			<!-- Select/Deselect All -->
 			<div>
-				<h3 class="text-primary">Dom CDN</h3>
-				<div class="custom-control custom-checkbox custom-control-inline">
-					<input type="checkbox" class="custom-control-input checkboxPath" id="checkDomUtilities">
-					<label class="custom-control-label text-info" for="checkDomUtilities">Dom Utilities</label>
+				<h3 class="text-primary">Quick Select</h3>
+				
+				<button type="button" class="btn btn-primary" id="btnSelectAll">Select All</button>
+				<button type="button" class="btn btn-primary" id="btnDeselectAll">Deselect All</button>
+			</div>
+			<br />
+				
+			<!-- CDN Checkboxes -->
+			<div id="cdnsDiv">
+				<div>
+					<h3 class="text-primary">Dom CDN</h3>
+					<div class="custom-control custom-checkbox custom-control-inline">
+						<input type="checkbox" class="custom-control-input checkboxPath" id="checkDomUtilities">
+						<label class="custom-control-label text-info" for="checkDomUtilities">Dom Utilities</label>
+					</div>
+				</div>
+				<br />
+
+				<div>
+					<h3 class="text-primary">jQuery CDN</h3>
+					<div class="custom-control custom-checkbox custom-control-inline">
+						<input type="checkbox" class="custom-control-input checkboxPath" id="checkJqueryUtilities">
+						<label class="custom-control-label text-info" for="checkJqueryUtilities">jQuery Utilities</label>
+					</div>
+				</div>
+				<br />
+
+				<div>
+					<h3 class="text-primary">Node CDN</h3>
+					<div class="custom-control custom-checkbox custom-control-inline">
+						<input type="checkbox" class="custom-control-input checkboxPath" id="checkNodeAjax">
+						<label class="custom-control-label text-info" for="checkNodeAjax">Node Ajax</label>
+					</div>
+				</div>
+				<br />
+
+				<div>
+					<h3 class="text-primary">Vanilla CDN</h3>
+
+					<div class="custom-control custom-checkbox custom-control-inline">
+						<input type="checkbox" class="custom-control-input checkboxPath" id="checkVanillaArrays">
+						<label class="custom-control-label text-info" for="checkVanillaArrays">Arrays</label>
+					</div>
+					<div class="custom-control custom-checkbox custom-control-inline">
+						<input type="checkbox" class="custom-control-input checkboxPath" id="checkVanillaValidation">
+						<label class="custom-control-label text-info" for="checkVanillaValidation">Validation</label>
+					</div>
+					<div class="custom-control custom-checkbox custom-control-inline">
+						<input type="checkbox" class="custom-control-input checkboxPath" id="checkVanillaAjax">
+						<label class="custom-control-label text-info" for="checkVanillaAjax">Vanilla Ajax</label>
+					</div>
+					<div class="custom-control custom-checkbox custom-control-inline">
+						<input type="checkbox" class="custom-control-input checkboxPath" id="checkVanillaUtilities">
+						<label class="custom-control-label text-info" for="checkVanillaUtilities">Vanilla Utilities</label>
+					</div>
 				</div>
 			</div>
 			<br />
-
-			<div>
-				<h3 class="text-primary">jQuery CDN</h3>
-				<div class="custom-control custom-checkbox custom-control-inline">
-					<input type="checkbox" class="custom-control-input checkboxPath" id="checkJqueryUtilities">
-					<label class="custom-control-label text-info" for="checkJqueryUtilities">jQuery Utilities</label>
-				</div>
-			</div>
-			<br />
-
-			<div>
-				<h3 class="text-primary">Node CDN</h3>
-				<div class="custom-control custom-checkbox custom-control-inline">
-					<input type="checkbox" class="custom-control-input checkboxPath" id="checkNodeAjax">
-					<label class="custom-control-label text-info" for="checkNodeAjax">Node Ajax</label>
-				</div>
-			</div>
-			<br />
-
-			<div>
-				<h3 class="text-primary">Vanilla CDN</h3>
-
-				<div class="custom-control custom-checkbox custom-control-inline">
-					<input type="checkbox" class="custom-control-input checkboxPath" id="checkVanillaArrays">
-					<label class="custom-control-label text-info" for="checkVanillaArrays">Arrays</label>
-				</div>
-				<div class="custom-control custom-checkbox custom-control-inline">
-					<input type="checkbox" class="custom-control-input checkboxPath" id="checkVanillaValidation">
-					<label class="custom-control-label text-info" for="checkVanillaValidation">Validation</label>
-				</div>
-				<div class="custom-control custom-checkbox custom-control-inline">
-					<input type="checkbox" class="custom-control-input checkboxPath" id="checkVanillaAjax">
-					<label class="custom-control-label text-info" for="checkVanillaAjax">Vanilla Ajax</label>
-				</div>
-				<div class="custom-control custom-checkbox custom-control-inline">
-					<input type="checkbox" class="custom-control-input checkboxPath" id="checkVanillaUtilities">
-					<label class="custom-control-label text-info" for="checkVanillaUtilities">Vanilla Utilities</label>
-				</div>
-			</div>
-		</div>
-		<br />
-		
-		<button type="button" class="btn btn-primary" id="submitButton">Submit</button>
-	</form>
-	<br />
-		
-	<div id="displayArea">
+			
+			<button type="button" class="btn btn-primary" id="submitButton">Submit</button>
+		</form>
 	</div>
-	<pre id="codeArea">
-	</pre>
+	
+	<div class="rightContainer">
+		<div id="displayArea"></div>
+
+		<pre id="codeArea"></pre>
+	</div>
 </div>
 
 </body>
