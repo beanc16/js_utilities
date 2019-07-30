@@ -22,6 +22,7 @@ function isHtmlString(str)
  */
 function sanitizeStringFromHtml(htmlStr) 
 {
+	/*
 	// Initialize tags to test for
 	let tagBody = '(?:[^"\'>]|"[^"]*"|\'[^\']*\')*';
 
@@ -50,7 +51,12 @@ function sanitizeStringFromHtml(htmlStr)
 	
 	// Remove any unfinished tags
 	htmlStr = htmlStr.replace(/</g, '&lt;');
+	*/
+	// Create a temporary element and set the string to be text
+	let temp = document.createElement('div');
+	temp.textContent = htmlStr;
 	
+	htmlStr = temp.innerHTML;
 	return htmlStr;
 }
 
