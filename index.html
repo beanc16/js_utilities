@@ -41,19 +41,32 @@
 	-->
 	
 	<form id="form">
-			<!-- Do version range and specific versions (IE: 0.0.1, 1.0.0, 0.2, 1, latest version (not recommended for production)) -->
-			<!-- 
-			Sample combined file
-			https://cdn.jsdelivr.net/combine/gh/beanc16/js_utilities@0.0.1/vanilla/validation.js,gh/beanc16/js_utilities@0.0.1/vanilla/vanilla_ajax.js
-																								^ comma here; start next file at "gh"
-			-->
 		<!-- Options -->
 		<div id="optionsDiv">
+		
+			<!-- Header -->
 			<h3 class="text-primary">Options</h3>
+			
+			<!-- Get CDN/SRC -->
 			<input type="checkbox" checked data-toggle="toggle" data-on="Get CDN" data-off="Get SRC link" id="toggleGetCdn"
 																data-onstyle="primary" data-offstyle="secondary">
+																
+			<!-- Combine/Uncombine CDN -->
 			<input type="checkbox" checked data-toggle="toggle" data-on="Combine CDNs" data-off="Separate CDNs" id="toggleCombineCdns"
 																data-onstyle="primary" data-offstyle="secondary">
+																
+			<!-- Version Dropdown -->
+			<div class="btn-group">
+				<button type="button" class="btn btn-primary dropdown-toggle" id="dropdownVersionButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Version
+			    </button>
+			    <div class="dropdown-menu">
+					<a class="dropdown-item">0.0.1</a>
+					<div class="dropdown-divider"></div>
+					<a class="dropdown-item">latest (not recommended for production)</a>
+			    </div>
+			</div>
+			
 		</div>
 		<br />
 		<br />

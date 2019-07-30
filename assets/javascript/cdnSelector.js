@@ -10,7 +10,10 @@ runOnDocumentReady(
 	() => preventPageRefresh(),
 	
 	// Add submit button click functionality
-	() => runOnClick("#submitButton", () => onSubmitButtonClick())
+	() => runOnClick("#submitButton", () => onSubmitButtonClick()),
+	
+	// Add version dropdown functionality
+	() => initializeVersionDropdown()
 );
 
 
@@ -192,6 +195,35 @@ function runFunctionsFromOptions(allOptions, selectedIds)
 			}
 		}
 	}	
+}
+
+function initializeVersionDropdown()
+{
+	// Get all options in the dropdown menu
+	let dropdownVersions = document.getElementsByClassName("dropdown-item");
+	
+	for (let i = 0; i < dropdownVersions.length; i++)
+	{
+		// Set each option's click functionality
+		dropdownVersions[i].onclick = function() 
+		{
+			// Get the new version to display
+			let newVersion = this.innerHTML;
+			
+			// Remove extra text in the "latest" option
+			if (newVersion.includes("latest"))
+			{
+				newVersion = "latest";
+			}
+			
+			// Set the version variable
+			version = newVersion;
+			
+			// Update the dropdown to display the new selected version
+			let dropdownVersionButton = document.getElementById("dropdownVersionButton");
+			dropdownVersionButton.innerHTML = newVersion;
+		}
+	}
 }
 
 
