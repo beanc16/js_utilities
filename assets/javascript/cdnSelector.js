@@ -1,3 +1,7 @@
+/******************
+ * INITIALIZATION *
+ ******************/
+
 /*
  * $(document).ready
  */
@@ -9,6 +13,13 @@ runOnDocumentReady(
 	() => runOnClick("#submitButton", () => onSubmitButtonClick())
 );
 
+
+
+
+
+/********************
+ * GLOBAL VARIABLES *
+ ********************/
 
 /*
 	CDN Template:
@@ -25,12 +36,12 @@ let optionsDictionary = {
 
 	// idOnHtmlPage
 	"toggleGetCdn": {
-		true: displayCdns,
-		false: displaySrcLinks
+		true: displayCdnCombinedOrNotCombined,
+		false: displaySrcCombinedOrNotCombined
 	},
 	"toggleCombineCdns": {
-		true: "true"/*displayCombinedSrcLink*/,
-		false: "false"//displayCombinedCdn
+		true: "true", 		// Dummy value
+		false: "false" 		// Dummy value
 	}
 };
 
@@ -49,17 +60,23 @@ let cdnObj = {
 	checkNodeAjax: "node/node_ajax.js",
 	
 	// Vanilla
-	checkVanillaArrays: "vanilla/arrays.js ",
-	checkVanillaValidation: "vanilla/validation.js ",
-	checkVanillaAjax: "vanilla/vanilla_ajax.js ",
+	checkVanillaArrays: "vanilla/arrays.js",
+	checkVanillaValidation: "vanilla/validation.js",
+	checkVanillaAjax: "vanilla/vanilla_ajax.js",
 	checkVanillaUtilities: "vanilla/vanilla_utilities.js"
 };
 
 
 
+
+
+/******************
+ * INITIAL SUBMIT *
+ ******************/
+
 function onSubmitButtonClick()
 {
-	// Get & clear the display areas
+	// Get & clear the displays
 	let displayArea = document.getElementById("displayArea");
 	let codeArea = document.getElementById("codeArea");
 	displayArea.innerHTML = "";
@@ -146,7 +163,6 @@ function getAllOptions(selectedIds)
 			allOptions[key] = false;
 		}
 	}
-	//console.log(allOptions);	
 	
 	return allOptions;
 }
@@ -169,7 +185,7 @@ function runFunctionsFromOptions(allOptions, selectedIds)
 					{
 						if (typeof optionsDictionaryValue[boolValue] == "function")
 						{
-							optionsDictionaryValue[boolValue](selectedIds);
+							optionsDictionaryValue[boolValue](selectedIds, allOptions);
 						}
 					}
 				}
@@ -180,12 +196,63 @@ function runFunctionsFromOptions(allOptions, selectedIds)
 
 
 
-function displaySrcLinks(selectedIds)
+
+
+/****************
+ * OPTIONS TEST *
+ ****************/
+
+function displaySrcCombinedOrNotCombined(selectedIds, allOptions)
+{
+	for (let key in allOptions)
+	{
+		// DO combine the SRC links
+		if (key == "toggleCombineCdns" && allOptions[key] == true)
+		{
+			displayCombinedSrcLink(selectedIds, allOptions);
+		}
+		
+		// DO NOT combine the SRC links
+		else if (key == "toggleCombineCdns" && allOptions[key] == false)
+		{
+			displaySrcLinks(selectedIds, allOptions)
+		}
+	}
+}
+
+function displayCdnCombinedOrNotCombined(selectedIds, allOptions)
+{
+	for (let key in allOptions)
+	{
+		// DO combine the CDNs
+		if (key == "toggleCombineCdns" && allOptions[key] == true)
+		{
+			displayCombinedCdn(selectedIds, allOptions);
+			return;	// End the function after displaying the combined SRC link
+		}
+		
+		// DO NOT combine the CDNs
+		else if (key == "toggleCombineCdns" && allOptions[key] == false)
+		{
+			displayCdns(selectedIds, allOptions);
+		}
+	}
+}
+
+
+
+
+
+/******************
+ * UNCOMBINED SRC *
+ ******************/
+
+function displaySrcLinks(selectedIds, allOptions)
 {
 	let displayArea = document.getElementById("displayArea");
 	
 	// Get what should be displayed
-	let allSrcLinks = getAllSrcLinks(selectedIds);
+	allSrcLinks = getAllSrcLinks(selectedIds);
 	
 	// Add each element that should be displayed to the 
 	for (let i = 0; i < allSrcLinks.length; i++)
@@ -227,7 +294,6 @@ function getAllSrcLinks(selectedIds)
 			}
 		}
 	}
-	//console.log(allCdns);
 	
 	return allCdns;
 }
@@ -239,7 +305,15 @@ function getFullSrcLink(currentPath)
 	return cdn;
 }
 
-function displayCombinedSrcLink(selectedIds)
+
+
+
+
+/****************
+ * COMBINED SRC *
+ ****************/
+
+function displayCombinedSrcLink(selectedIds, allOptions)
 {
 	let displayArea = document.getElementById("displayArea");
 	
@@ -248,6 +322,13 @@ function displayCombinedSrcLink(selectedIds)
 	
 	if (allPaths.length != 0)
 	{
+		// If there's only one path selected, don't make it a combined SRC
+		if (allPaths.length == 1)
+		{
+			displaySrcLinks(selectedIds, allOptions);
+			return;
+		}
+		
 		let combinedLink = getCombinedSrcLink(allPaths);
 	
 		// Set the combined link as an element to display
@@ -311,12 +392,20 @@ function getCombinedSrcLink(allPaths)
 
 
 
-function displayCdns(selectedIds)
+
+
+/******************
+ * UNCOMBINED CDN *
+ ******************/
+
+function displayCdns(selectedIds, allOptions)
 {
-	let codeArea = document.getElementById("codeArea");
+	let allSrcLinks;
 	
 	// Get what should be displayed
-	let allSrcLinks = getAllSrcLinks(selectedIds);
+	allSrcLinks = getAllSrcLinks(selectedIds);	
+	
+	let codeArea = document.getElementById("codeArea");
 	
 	// Add each element that should be displayed to the 
 	for (let i = 0; i < allSrcLinks.length; i++)
@@ -333,22 +422,46 @@ function displayCdns(selectedIds)
 	}
 }
 
-function displayCombinedCdn(selectedIds)
+
+
+
+
+/****************
+ * COMBINED CDN *
+ ****************/
+
+function displayCombinedCdn(selectedIds, allOptions)
 {
 	let codeArea = document.getElementById("codeArea");
 	
 	// Get all paths
 	let allPaths = getAllPathsForCombinedLink(selectedIds);
 	
-	// Get what should be displayed
-	let combinedLink = getCombinedSrcLink(allPaths);
-	
-	let script = getScriptElement(combinedLink);
-	let cdn = getCodeElement(script.outerHTML);
-	codeArea.appendChild(cdn);
+	if (allPaths.length != 0)
+	{
+		// If there's only one path selected, don't make it a combined CDN
+		if (allPaths.length == 1)
+		{
+			displayCdns(selectedIds, allOptions);
+			return;
+		}
+		
+		// Get what should be displayed
+		let combinedLink = getCombinedSrcLink(allPaths);
+		
+		let script = getScriptElement(combinedLink);
+		let cdn = getCodeElement(script.outerHTML);
+		codeArea.appendChild(cdn);
+	}
 }
 
 
+
+
+
+/***************
+ * CDN HELPERS *
+ ***************/
 
 function getCodeElement(displayText)
 {
