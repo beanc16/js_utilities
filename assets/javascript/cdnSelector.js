@@ -225,6 +225,9 @@ function initializeVersionDropdown()
 			// Update the dropdown to display the new selected version
 			let dropdownVersionButton = document.getElementById("dropdownVersionButton");
 			dropdownVersionButton.innerHTML = newVersion;
+			
+			// Reload the link
+			onSubmitButtonClick();
 		}
 	}
 }
