@@ -13,7 +13,10 @@ runOnDocumentReady(
 	() => runOnClick("#submitButton", () => onSubmitButtonClick()),
 	
 	// Add version dropdown functionality
-	() => initializeVersionDropdown()
+	() => initializeVersionDropdown(),
+	
+	// Add select/deselect all functionality
+	() => initializeQuickSelectOptions()
 );
 
 
@@ -222,6 +225,30 @@ function initializeVersionDropdown()
 			// Update the dropdown to display the new selected version
 			let dropdownVersionButton = document.getElementById("dropdownVersionButton");
 			dropdownVersionButton.innerHTML = newVersion;
+		}
+	}
+}
+
+function initializeQuickSelectOptions()
+{
+	let pathCheckboxes = document.getElementsByClassName("checkboxPath");
+	
+	let selectAllCheckbox = document.getElementById("btnSelectAll");
+	let deselectAllCheckbox = document.getElementById("btnDeselectAll");
+	
+	selectAllCheckbox.onclick = function()
+	{
+		for (let i = 0; i < pathCheckboxes.length; i++)
+		{
+			pathCheckboxes[i].checked = true;
+		}
+	}
+	
+	deselectAllCheckbox.onclick = function()
+	{
+		for (let i = 0; i < pathCheckboxes.length; i++)
+		{
+			pathCheckboxes[i].checked = false;
 		}
 	}
 }
