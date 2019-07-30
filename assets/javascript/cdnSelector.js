@@ -57,6 +57,9 @@ let cdnObj = {
 	// idOnHtmlPage: path
 	
 	// DOM
+	checkBootstrapUtilities: "bootstrap/bootstrap_utilities.js",
+	
+	// DOM
 	checkDomUtilities: "dom/dom_utilities.js",
 	
 	// jQuery
