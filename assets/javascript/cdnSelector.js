@@ -66,10 +66,7 @@ let cdnObj = null;
  {
 	// Make all checkboxes update the CDN/SRC when clicked
 	let checkboxes = document.getElementsByTagName("input");
-	for (let i = 0; i < checkboxes.length; i++)
-	{
-		runOnClickDom(checkboxes[i], showDisplay);
-	}
+	runOnClickDoms(checkboxes, showDisplay);
 	
 	// Make all toggles update the CDN/SRC when clicked
 	initializeAllTogglesFunctionality(showDisplay);
@@ -350,8 +347,8 @@ function getLocalCdnObj()
 	// Create an empty CDN object
 	let localCdnObj = new Object();
 	
-	// Version 0.2.0
-	localCdnObj["0.2.0"] = {
+	// Version 0.2.1
+	localCdnObj["0.2.1"] = {
 			// idOnHtmlPage: path
 		
 			// Bootstrap
