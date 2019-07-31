@@ -51,29 +51,8 @@ let optionsDictionary = {
 	}
 };
 
-// Track all CDN files
-let cdnObj = {
-	
-	// idOnHtmlPage: path
-	
-	// DOM
-	checkBootstrapUtilities: "bootstrap/bootstrap_utilities.js",
-	
-	// DOM
-	checkDomUtilities: "dom/dom_utilities.js",
-	
-	// jQuery
-	checkJqueryUtilities: "jquery/jquery_utilities.js",
-	
-	// Node
-	checkNodeAjax: "node/node_ajax.js",
-	
-	// Vanilla
-	checkVanillaArrays: "vanilla/arrays.js",
-	checkVanillaValidation: "vanilla/validation.js",
-	checkVanillaAjax: "vanilla/vanilla_ajax.js",
-	checkVanillaUtilities: "vanilla/vanilla_utilities.js"
-};
+// Track all CDN paths based on the version
+let cdnObj = null;
 
 
 
@@ -85,6 +64,12 @@ let cdnObj = {
 
 function onSubmitButtonClick()
 {
+	// Set the global cdnObj to be the latest version if none is set
+	if (cdnObj == null)
+	{
+		setCdnObjBasedOnVersion("latest");
+	}
+	
 	// Get & clear the displays
 	let displayArea = document.getElementById("displayArea");
 	let codeArea = document.getElementById("codeArea");
@@ -229,6 +214,9 @@ function initializeVersionDropdown()
 			let dropdownVersionButton = document.getElementById("dropdownVersionButton");
 			dropdownVersionButton.innerHTML = newVersion;
 			
+			// Set the correct global CDN obj
+			setCdnObjBasedOnVersion(newVersion);
+			
 			// Reload the link
 			onSubmitButtonClick();
 		}
@@ -244,17 +232,25 @@ function initializeQuickSelectOptions()
 	
 	selectAllCheckbox.onclick = function()
 	{
+		// Select all enabled checkboxes
 		for (let i = 0; i < pathCheckboxes.length; i++)
 		{
-			pathCheckboxes[i].checked = true;
+			if (pathCheckboxes[i].disabled == false)
+			{
+				pathCheckboxes[i].checked = true;
+			}
 		}
 	}
 	
 	deselectAllCheckbox.onclick = function()
 	{
+		// Deselect all enabled checkboxes
 		for (let i = 0; i < pathCheckboxes.length; i++)
 		{
-			pathCheckboxes[i].checked = false;
+			if (pathCheckboxes[i].disabled == false)
+			{
+				pathCheckboxes[i].checked = false;
+			}
 		}
 	}
 }
@@ -301,6 +297,128 @@ function displayCdnCombinedOrNotCombined(selectedIds, allOptions)
 		{
 			displayCdns(selectedIds, allOptions);
 		}
+	}
+}
+
+function setCdnObjBasedOnVersion(versionNum)
+{	
+	// Get the local CDN object based 
+	let localCdnObj = getLocalCdnObj();
+	
+	// Set the version to latest if it wasn't set
+	if (versionNum == null)
+	{
+		versionNum = "latest";
+	}
+	
+	// If the version is "latest", set the version number to the latest actual version
+	if (versionNum == "latest")
+	{
+		for (let key in localCdnObj)
+		{
+			versionNum = key;
+			break;
+		}
+	}
+	
+	// Set the global CDN object
+	cdnObj = localCdnObj[versionNum];
+	
+	// Enable/Disable checkboxes based on the selected version
+	enableDisableAvailableCdnSelections();
+}
+
+function getLocalCdnObj()
+{
+	// Create an empty CDN object
+	let localCdnObj = new Object();
+	
+	// Version 0.1.1
+	localCdnObj["0.1.1"] = {
+			// idOnHtmlPage: path
+		
+			// Bootstrap
+			checkBootstrapUtilities: "bootstrap/bootstrap_utilities.js",
+			
+			// DOM
+			checkDomUtilities: "dom/dom_utilities.js",
+			
+			// jQuery
+			checkJqueryUtilities: "jquery/jquery_utilities.js",
+			
+			// Node
+			checkNodeAjax: "node/node_ajax.js",
+			
+			// Vanilla
+			checkVanillaArrays: "vanilla/arrays.js",
+			checkVanillaValidation: "vanilla/validation.js",
+			checkVanillaAjax: "vanilla/vanilla_ajax.js",
+			checkVanillaUtilities: "vanilla/vanilla_utilities.js"
+		};
+	
+	// Version 0.0.1	
+	localCdnObj["0.0.1"] = {
+			// idOnHtmlPage: path
+			
+			// DOM
+			checkDomUtilities: "dom/dom_utilities.js",
+			
+			// jQuery
+			checkJqueryUtilities: "jquery/jquery_utilities.js",
+			
+			// Node
+			checkNodeAjax: "node/node_ajax.js",
+			
+			// Vanilla
+			checkVanillaArrays: "vanilla/arrays.js",
+			checkVanillaValidation: "vanilla/validation.js",
+			checkVanillaAjax: "vanilla/vanilla_ajax.js",
+			checkVanillaUtilities: "vanilla/vanilla_utilities.js"
+		};
+	
+	return localCdnObj;
+}
+
+function enableDisableAvailableCdnSelections()
+{
+	// Set all CDNs and their IDs in an object
+	let allCdnCheckboxes = document.getElementsByClassName("checkboxPath");
+	let allCdns = {};
+	for (let i = 0; i < allCdnCheckboxes.length; i++)
+	{
+		allCdns[allCdnCheckboxes[i].id] = allCdnCheckboxes[i];
+	}
+	
+	// Enable all checkboxes that are available in the selected version
+	for (let key in cdnObj)
+	{
+		// The selected version has the given key
+		if (allCdns.hasOwnProperty(key))
+		{
+			// Enable the given checkbox
+			allCdns[key].disabled = false;
+			
+			// Change the text color of the label (CSS)
+			let label = allCdns[key].parentNode.getElementsByClassName("custom-control-label")[0];
+			label.classList.remove("text-muted");
+			label.classList.add("text-info");
+			
+			// Delete the given key:value pair (disable remaining key:value pairs later)
+			delete allCdns[key];
+		}
+	}
+	
+	// Disable all remaining checkboxes that aren't available in the selected version
+	for (let key in allCdns)
+	{
+		// Disable the given checkbox and uncheck it
+		allCdns[key].disabled = true;
+		allCdns[key].checked = false;
+		
+		// Change the text color of the label (CSS)
+		let label = allCdns[key].parentNode.getElementsByClassName("custom-control-label")[0];
+		label.classList.remove("text-info");
+		label.classList.add("text-muted");
 	}
 }
 
