@@ -160,6 +160,21 @@ function runOnClick(tag, func)
 }
 
 /**
+ * runOnClickMany
+ * Description. Run the given function when the elements with the given 
+ * 				tags are clicked.
+ * @param {Array}    arrayOfTags
+ * @param {function} func
+ */
+function runOnClickMany(arrayOfTags, func)
+{
+	for (let i = 0; i < arrayOfTags.length; i++)
+	{
+		runOnClick(arrayOfTags[i], func);
+	}
+}
+
+/**
  * runOnClickWithEvent
  * Description. Run the given function (with the event passed as a 
  * 				parameter) when the element with the given tag is 

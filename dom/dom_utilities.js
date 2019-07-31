@@ -146,13 +146,40 @@ function runOnClickDom(element, func)
 }
 
 /**
- * disableClickFunctionality
+ * runOnClickDoms
+ * Summary. Run the given function when the given elements are clicked.
+ * @param {Array}    arrayOfElements
+ * @param {function} func
+ */
+function runOnClickDoms(arrayOfElements, func)
+{
+	for (let i = 0; i < arrayOfElements.length; i++)
+	{
+		runOnClickDom(arrayOfElements[i], func);
+	}
+}
+
+/**
+ * removeOnClickDom
  * Summary. Disable the given element from being clicked.
  * @param element
  */
 function removeOnClickDom(element)
 {
 	element.onclick = null;
+}
+
+/**
+ * removeOnClickDoms
+ * Summary. Disable the given elements from being clicked.
+ * @param element
+ */
+function removeOnClickDoms(arrayOfElements)
+{
+	for (let i = 0; i < arrayOfElements.length; i++)
+	{
+		removeOnClickDom(arrayOfElements[i]);
+	}
 }
 
 /**
