@@ -10,7 +10,8 @@ runOnDocumentReady(
 	() => preventPageRefresh(),
 	
 	// Add submit button click functionality
-	() => runOnClick("#submitButton", () => onSubmitButtonClick()),
+	//() => runOnClick("#submitButton", () => showDisplay()),
+	() => initializeAllElementClicks(),
 	
 	// Add version dropdown functionality
 	() => initializeVersionDropdown(),
@@ -61,8 +62,29 @@ let cdnObj = null;
 /******************
  * INITIAL SUBMIT *
  ******************/
+ 
+ function initializeAllElementClicks()
+ {
+	// Make all checkboxes update the CDN/SRC when clicked
+	let checkboxes = document.getElementsByTagName("input");
+	for (let i = 0; i < checkboxes.length; i++)
+	{
+		checkboxes[i].onclick = () => showDisplay();
+	}
+	
+	// Make all toggles update the CDN/SRC when clicked
+	let toggles = document.getElementsByClassName("toggle");
+	for (let i = 0; i < toggles.length; i++)
+	{
+		toggles[i].onclick = () => setTimeout(showDisplay, 1);			// Needs short delay in order for toggle to activate correctly
+	}
+	
+	// Make "Select All" and "Deselect All" buttons update the CDN/SRC when clicked
+	runOnClick("#btnSelectAll", () => setTimeout(showDisplay, 1));		// Needs short delay to wait for checkboxes to be marked
+	runOnClick("#btnDeselectAll", () => setTimeout(showDisplay, 1));	// Needs short delay to wait for checkboxes to be unmarked
+ }
 
-function onSubmitButtonClick()
+function showDisplay()
 {
 	// Set the global cdnObj to be the latest version if none is set
 	if (cdnObj == null)
@@ -218,7 +240,7 @@ function initializeVersionDropdown()
 			setCdnObjBasedOnVersion(newVersion);
 			
 			// Reload the link
-			onSubmitButtonClick();
+			showDisplay();
 		}
 	}
 }
