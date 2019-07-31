@@ -1,3 +1,7 @@
+/********
+ * AJAX *
+ ********/
+
 /**
  * sendAjaxRequest
  * Summary. Send an ajax get or post request with the given parameters.

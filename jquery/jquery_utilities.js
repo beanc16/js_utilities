@@ -123,6 +123,17 @@ function disableHtmlElement(tag, shouldDisable)
     $(tag).prop('disabled', shouldDisable);
 }
 
+/**
+ * removeElement
+ * Summary. Remove the HTML element with the given tag.
+ * @param {string}  tag
+ */
+function removeHtmlElement(tag)
+{
+	// Remove the element with the given tag
+	$(tag).remove();
+}
+
 
 
 
@@ -167,6 +178,19 @@ function runOnClickWithEvent(tag, func)
 }
 
 /**
+ * removeOnClick
+ * Description. Disable the element with the given tag from doing 
+ * 				anything when clicked.
+ * @param {string} tag
+ */
+function removeOnClick(tag)
+{
+	// Remove click functionality for elements with the given name
+    $(tag).off("click").click(null);
+                           // ^ null = no function on click
+}
+
+/**
  * disableClickFunctionality
  * Description. Disable the element with the given tag from doing 
  * 				anything when clicked.
@@ -174,7 +198,5 @@ function runOnClickWithEvent(tag, func)
  */
 function disableClickFunctionality(tag)
 {
-    // Remove click functionality for elements with the given name
-    $(tag).off("click").click(null);
-                           // ^ null = no function on click
+    removeOnClick(tag);
 }

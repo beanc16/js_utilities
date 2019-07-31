@@ -1,3 +1,37 @@
+/***********
+ * GENERAL *
+ ***********/
+
+/**
+ * runOnReady
+ * Summary. 	Run each given function when the page is loaded.
+ * Description. PASS ALL PARAMETERS TO THIS FUNCTION AS:
+ *          	() => functionName(parameters)
+ *
+ * @param {function} functions
+ */
+function runOnReady(...functions)
+{
+    // Run when the document is loaded
+	window.onload = function()
+    {
+        // Loop over each given function
+        for (let num = 0; num < functions.length; num++)
+        {
+            // Run the current given function
+            functions[num]();
+        }
+    };
+}
+
+
+
+
+
+/************
+ * BOOLEANS *
+ ************/
+
 /**
  * isHtmlElementOrNode
  * Summary. Test if the given htmlObject is a node or HTML element.
@@ -46,6 +80,38 @@ function isHtmlElement(o)
 	);
 }
 
+
+
+
+
+/****************
+ * DOM ELEMENTS *
+ ****************/
+
+/**
+ * enableDomElement
+ * Summary. Enable or disable the given DOM element.
+ * @param {string}  element
+ * @param {boolean} shouldEnable
+ */
+function enableDomElement(element, shouldEnable)
+{
+    // Enable element if true; Disable element if false
+    disableDomElement(tag, !shouldEnable);
+}
+
+/**
+ * disableDomElement
+ * Summary. Enable or disable the given DOM element.
+ * @param {string}  element
+ * @param {boolean} shouldDisable
+ */
+function disableDomElement(element, shouldDisable)
+{
+    // Enable element if false || Disable element if true
+	element.disabled = shouldDisable;
+}
+
 /** 
  * removeGivenElement
  * Summary. Remove the given element from the HTML page.
@@ -59,4 +125,42 @@ function removeGivenElement(elementToRemove)
 	// Remove the given element from the parent
 	parent.removeChild(elementToRemove);
 }
- 
+
+
+
+
+
+/***********************
+ * CLICK FUNCTIONALITY *
+ ***********************/
+
+/**
+ * runOnClickDom
+ * Summary. Run the given function when the given element is clicked.
+ * @param            element
+ * @param {function} func
+ */
+function runOnClickDom(element, func)
+{
+	element.onclick = () => func();
+}
+
+/**
+ * disableClickFunctionality
+ * Summary. Disable the given element from being clicked.
+ * @param element
+ */
+function removeOnClickDom(element)
+{
+	element.onclick = null;
+}
+
+/**
+ * disableClickFunctionality
+ * Summary. Disable the given element from being clicked.
+ * @param element
+ */
+function disableClickFunctionalityDom(element)
+{
+	removeOnClickDom(element);
+}

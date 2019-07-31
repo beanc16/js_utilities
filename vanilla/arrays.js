@@ -19,15 +19,15 @@ function addElementToEndOfArray(array, element)
 /**
  * addElementsToEndOfArray
  * @param {Array} array
- * @param {Array} elements
+ * @param {Array} arrayOfElements
  * @returns {Array}
  */
-function addElementsToEndOfArray(array, elements)
+function addElementsToEndOfArray(array, arrayOfElements)
 {
-    for (let i = 0; i < elements.length; i++)
+    for (let i = 0; i < arrayOfElements.length; i++)
     {
         // Add the current element to the end of the array
-        array = addElementToEndOfArray(array, elements[i]);
+        array = addElementToEndOfArray(array, arrayOfElements[i]);
     }
 
     return array;
@@ -50,18 +50,65 @@ function addElementToBeginningOfArray(array, element)
 /**
  * addElementsToBeginningOfArray
  * @param {Array} array
- * @param {Array} elements
+ * @param {Array} arrayOfElements
  * @returns {Array}
  */
-function addElementsToBeginningOfArray(array, elements)
+function addElementsToBeginningOfArray(array, arrayOfElements)
 {
-    for (let i = 0; i < elements.length; i++)
+    for (let i = 0; i < arrayOfElements.length; i++)
     {
         // Add the current element to the array
-        array = addElementToBeginningOfArray(array, elements[i]);
+        array = addElementToBeginningOfArray(array, arrayOfElements[i]);
     }
 
     return array;
+}
+
+/**
+ * addElementAtGivenPositionOfArray
+ * @param {Array}  array
+ * @param {Number} indexToAddAt
+ * @param 		   element
+ * @returns {Array}
+ */
+function addElementAtGivenPositionOfArray(array, indexToAddAt, element)
+{
+	array.splice(indexToAddAt, 0, element);
+	return array;
+}
+
+/**
+ * addElementAtGivenPositionOfArray
+ * @param {Array}  array
+ * @param {Number} indexToAddAt
+ * @param {Array}  arrayOfElements
+ * @returns {Array}
+ */
+function addElementsAtGivenPositionOfArray(array, indexToAddAt, arrayOfElements)
+{
+	// Add each given element to the array in reverse order at the given index
+	for (let i = arrayOfElements.length - 1; i >= 0; i--)
+	{
+		array = addElementAtGivenPositionOfArray(array, indexToAddAt, arrayOfElements[i]);
+	}
+	
+	return array;
+}
+
+/**
+ * combineArrays
+ * @param {Array} array
+ * @param {Array} otherArrays
+ * @returns {Array}
+ */
+function combineArrays(array, ...otherArrays)
+{
+	for (let i = 0; i < otherArrays.length; i++)
+	{
+		array = array.concat(otherArrays[i]);
+	}
+	
+	return array;
 }
 
 
@@ -127,10 +174,8 @@ function removeGivenElementFromArray(array, element)
     // The given element is in the array
     if (arrayHasGivenElement(array, element))
     {
-        // Get the index of the element
-        let index = array.indexOf(element);
-
         // Remove the element from the array
+        let index = array.indexOf(element);
         array.splice(index, index + 1);
     }
 
@@ -140,12 +185,12 @@ function removeGivenElementFromArray(array, element)
 /**
  * removeGivenElementsFromArray
  * @param {Array} array
- * @param {Array} elements
+ * @param {Array} arrayOfElements
  * @returns {Array}
  */
-function removeGivenElementsFromArray(array, elements)
+function removeGivenElementsFromArray(array, arrayOfElements)
 {
-    for (let element of elements)
+    for (let i = 0; i < arrayOfElements.length; i++)
     {
         // Remove the given element from the array if it exists
         array = removeGivenElementFromArray(array, element);
@@ -219,43 +264,69 @@ function arrayHasGivenElement(array, element)
 
 
 
-/*****************
- * MISCELLANEOUS *
- *****************/
+/***********
+ * SORTING *
+ ***********/
+ 
+ /**
+ * sortArrayAlphabetic
+ * @param {Array} array
+ * @param {boolean} shouldBeAscending
+ * @returns {Array}
+ */
+function sortArrayAlphabetic(array, shouldBeAscending)
+{
+	// Sort the array in ascending order
+	array.sort();
+	
+	// Sort the array in descending order if it SHOULD NOT be ascending
+	if (shouldBeAscending != null)
+	{
+		if (!shouldBeAscending)
+		{
+			array = reverseArray(array);
+		}
+	}
+	
+	return array;
+}
+
+/**
+ * sortArrayNumeric
+ * @param {Array} array
+ * @param {boolean} shouldBeAscending
+ * @returns {Array}
+ */
+function sortArrayNumeric(array, shouldBeAscending)
+{
+	// Sort the array in ascending order
+	if (shouldBeAscending == null || shouldBeAscending)
+	{
+		array.sort(function(a, b){return a - b});
+	}
+	
+	// Sort the array in descending order
+	if (shouldBeAscending != null)
+	{
+		if (!shouldBeAscending)
+		{
+			array.sort(function(a, b){return b - a});
+		}
+	}
+	
+	return array;
+}
 
 /**
  * randomizeArray
- * @param {Array} originalArray
+ * @param {Array} array
  * @returns {Array}
  */
-function randomizeArray(originalArray)
+function randomizeArray(array)
 {
-    // Create clone of array
-    let newArray = originalArray;
-
-    // Initialize current index
-    let currentIndex = originalArray.length;
-
-    // Declare helper variables
-    let temporaryValue, randomIndex;
-
-    // There are still elements to shuffle
-    while (0 !== currentIndex)
-    {
-        // Pick a random remaining element's index
-        randomIndex = Math.floor(Math.random() * currentIndex);
-
-        // Lower the current index
-        currentIndex--;
-
-        // Swap current array index with random index
-        temporaryValue = newArray[currentIndex];
-        newArray[currentIndex] = originalArray[randomIndex];
-        newArray[randomIndex] = temporaryValue;
-    }
-
-    // Return the newly randomized array
-    return newArray;
+	array.sort(function(a, b){return 0.5 - Math.random()});
+	
+	return array;
 }
 
 /**
@@ -268,4 +339,32 @@ function reverseArray(array)
 	array.reverse();
 	
 	return array;
+}
+
+
+
+
+
+/*****************
+ * MISCELLANEOUS *
+ *****************/
+
+/**
+ * getArrayMinNumber
+ * @param {Array} array
+ * @returns {number}
+ */
+function getArrayMinNumber(array) 
+{
+	return Math.min.apply(null, array);
+}
+
+/**
+ * getArrayMaxNumber
+ * @param {Array} array
+ * @returns {number}
+ */
+function getArrayMaxNumber(array) 
+{
+	return Math.max.apply(null, array);
 }

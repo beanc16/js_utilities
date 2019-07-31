@@ -1,3 +1,7 @@
+/*************
+ * NODE AJAX *
+ *************/
+
 /**
  * nodeGetRequest
  * Summary. Send an ajax request in Node.js.

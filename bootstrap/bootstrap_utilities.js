@@ -1,3 +1,7 @@
+/*************
+ * BOOTSTRAP *
+ *************/
+
 /**
  * getBootstrapCloseButton
  * Summary. Create a bootstrap close/"x" button.
@@ -54,4 +58,32 @@ function wasToggleTurnedOn(toggleElement)
 	}
 	
 	return null;
+}
+
+/**
+ * initializeToggleFunctionality
+ * Summary. Set the given toggle's click functionality.
+ * @param            toggle
+ * @param {function} func
+ */
+function initializeToggleFunctionality(toggle, func)
+{
+	toggle.onclick = () => setTimeout(func, 1);			// Needs short delay in order for toggle to activate correctly
+}
+
+/**
+ * initializeAllTogglesFunctionality
+ * Summary. Set the click functionality of all toggle elements.
+ * @param {function} func
+ */
+function initializeAllTogglesFunctionality(func)
+{
+	// Get all toggles
+	let toggles = document.getElementsByClassName("toggle");
+	
+	// Set each toggle's click functionality
+	for (let i = 0; i < toggles.length; i++)
+	{
+		initializeToggleFunctionality(toggles[i], func);
+	}
 }
