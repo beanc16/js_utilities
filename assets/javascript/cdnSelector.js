@@ -10,7 +10,6 @@ runOnDocumentReady(
 	() => preventPageRefresh(),
 	
 	// Add submit button click functionality
-	//() => runOnClick("#submitButton", () => showDisplay()),
 	() => initializeAllElementClicks(),
 	
 	// Add version dropdown functionality
@@ -69,15 +68,11 @@ let cdnObj = null;
 	let checkboxes = document.getElementsByTagName("input");
 	for (let i = 0; i < checkboxes.length; i++)
 	{
-		checkboxes[i].onclick = () => showDisplay();
+		runOnClickDom(checkboxes[i], showDisplay);
 	}
 	
 	// Make all toggles update the CDN/SRC when clicked
-	let toggles = document.getElementsByClassName("toggle");
-	for (let i = 0; i < toggles.length; i++)
-	{
-		toggles[i].onclick = () => setTimeout(showDisplay, 1);			// Needs short delay in order for toggle to activate correctly
-	}
+	initializeAllTogglesFunctionality(showDisplay);
 	
 	// Make "Select All" and "Deselect All" buttons update the CDN/SRC when clicked
 	runOnClick("#btnSelectAll", () => setTimeout(showDisplay, 1));		// Needs short delay to wait for checkboxes to be marked
@@ -254,7 +249,7 @@ function initializeQuickSelectOptions()
 	
 	selectAllCheckbox.onclick = function()
 	{
-		// Select all enabled checkboxes
+		// Check all enabled checkboxes
 		for (let i = 0; i < pathCheckboxes.length; i++)
 		{
 			if (pathCheckboxes[i].disabled == false)
@@ -266,7 +261,7 @@ function initializeQuickSelectOptions()
 	
 	deselectAllCheckbox.onclick = function()
 	{
-		// Deselect all enabled checkboxes
+		// Uncheck all enabled checkboxes
 		for (let i = 0; i < pathCheckboxes.length; i++)
 		{
 			if (pathCheckboxes[i].disabled == false)
@@ -355,6 +350,29 @@ function getLocalCdnObj()
 	// Create an empty CDN object
 	let localCdnObj = new Object();
 	
+	// Version 0.2.0
+	localCdnObj["0.2.0"] = {
+			// idOnHtmlPage: path
+		
+			// Bootstrap
+			checkBootstrapUtilities: "bootstrap/bootstrap_utilities.js",
+			
+			// DOM
+			checkDomUtilities: "dom/dom_utilities.js",
+			
+			// jQuery
+			checkJqueryUtilities: "jquery/jquery_utilities.js",
+			
+			// Node
+			checkNodeAjax: "node/node_ajax.js",
+			
+			// Vanilla
+			checkVanillaArrays: "vanilla/arrays.js",
+			checkVanillaValidation: "vanilla/validation.js",
+			checkVanillaAjax: "vanilla/vanilla_ajax.js",
+			checkVanillaUtilities: "vanilla/vanilla_utilities.js"
+		};
+	
 	// Version 0.1.1
 	localCdnObj["0.1.1"] = {
 			// idOnHtmlPage: path
@@ -412,6 +430,14 @@ function enableDisableAvailableCdnSelections()
 	}
 	
 	// Enable all checkboxes that are available in the selected version
+	allCdns = enableAvailableCheckboxes(allCdns);
+	
+	// Disable all remaining checkboxes that aren't available in the selected version
+	disableAvailableCheckboxes(allCdns);
+}
+
+function enableAvailableCheckboxes(allCdns)
+{
 	for (let key in cdnObj)
 	{
 		// The selected version has the given key
@@ -430,7 +456,11 @@ function enableDisableAvailableCdnSelections()
 		}
 	}
 	
-	// Disable all remaining checkboxes that aren't available in the selected version
+	return allCdns;
+}
+
+function disableAvailableCheckboxes(allCdns)
+{
 	for (let key in allCdns)
 	{
 		// Disable the given checkbox and uncheck it
