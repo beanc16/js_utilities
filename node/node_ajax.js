@@ -56,7 +56,7 @@ function nodePostRequest(url, dataKey, data, successFunction)
     $.ajax({
 		type: "POST",
 		url: url,
-		data: { "data": data },
+		data: { dataKey: data },
 		success: (returnData) => successFunction(returnData),
 		dataType: "json"
 	});
