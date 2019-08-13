@@ -30,18 +30,18 @@ function sendAjaxRequest(data, requestType, url, successCallback)
     // requestType is GET
     if (requestType.toLowerCase() === "get")
     {
-        sendGetRequest(xhttp, data, requestType, url);
+        _sendGetRequest(xhttp, data, requestType, url);
     }
 
     // requestType is POST
     else if (requestType.toLowerCase() === "post")
     {
-        sendPostRequest(xhttp, data, requestType, url);
+        _sendPostRequest(xhttp, data, requestType, url);
     }
 }
 
 /**
- * sendGetRequest
+ * _sendGetRequest
  * Description. A helper function for sendAjaxRequest(). It's highly 
  * 				recommended that you don't call this function in your 
  * 				code.
@@ -50,7 +50,7 @@ function sendAjaxRequest(data, requestType, url, successCallback)
  * @param {string} requestType
  * @param {string} url
  */
-function sendGetRequest(xhttp, data, requestType, url)
+function _sendGetRequest(xhttp, data, requestType, url)
 {
 	// There IS data
 	if (data)
@@ -77,7 +77,7 @@ function sendGetRequest(xhttp, data, requestType, url)
 }
 
 /**
- * sendPostRequest
+ * _sendPostRequest
  * Description. A helper function for sendAjaxRequest(). It's highly 
  * 				recommended that you don't call this function in your 
  * 				code.
@@ -86,7 +86,7 @@ function sendGetRequest(xhttp, data, requestType, url)
  * @param {string} requestType
  * @param {string} url
  */
-function sendPostRequest(xhttp, data, requestType, url)
+function _sendPostRequest(xhttp, data, requestType, url)
 {
 	// Open the xhttp object with POST
 	xhttp.open(requestType, url, true);

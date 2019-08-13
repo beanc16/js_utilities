@@ -28,12 +28,10 @@ function getBootstrapCloseButton()
 }
 
 /**
- * wasToggleTurnedOn
+ * isToggleOn
  * Summary. Test if a bootstrap toggle was turned on or off.
  * Description. WARNING: If you are running this function when the 
- *				toggle is clicked, you need to put it in a setTimeout 
- *				with a delay of 1. Otherwise, this will return the 
- *				incorrect value. 
+ *				toggle is clicked, call wasToggleTurnedOn() instead.
  *				Documentation on the bootstrap toggle add-on can be
  * 				found here:
  * 					Bootstrap 4:
@@ -43,7 +41,7 @@ function getBootstrapCloseButton()
  * @param toggleElement
  * @returns {*}
  */
-function wasToggleTurnedOn(toggleElement)
+function isToggleOn(toggleElement)
 {
 	// The toggle was turned on
 	if (toggleElement.className.includes("btn-success"))
@@ -58,6 +56,31 @@ function wasToggleTurnedOn(toggleElement)
 	}
 	
 	return null;
+}
+
+
+/**
+ * wasToggleTurnedOn
+ * Summary. Test if a bootstrap toggle was turned on or off.
+ * Description. WARNING: This function is intended to be ran 
+ *				when a toggle is clicked. If this function 
+ * 				isn't being ran when the toggle is clicked, 
+ * 				just call isToggleOn() instead.
+ *				Documentation on the bootstrap toggle add-on can be
+ * 				found here:
+ * 					Bootstrap 4:
+ * 					https://gitbrent.github.io/bootstrap4-toggle
+ * 					Bootstrap <=3:
+ * 					http://www.bootstraptoggle.com
+ * @param toggleElement
+ * @returns {*}
+ */
+function wasToggleTurnedOn(toggleElement)
+{
+	setTimeout(function()
+	{
+		return isToggleOn(toggleElement);
+	}, 1);
 }
 
 /**
