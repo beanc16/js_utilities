@@ -32,12 +32,17 @@ function getScriptElement(src)
 	return script;
 }
 
-function getAnchorElement(href)
-{
+function getAnchorElement(href, className, innerHTML)
+{	
 	let a = document.createElement("a");
-	a.href = href;
-	a.className = "text-info";	// For bootstrap color
-	a.innerHTML = href;
+	
+	if (href != null)
+	{
+		a.href = href;
+	}
+	
+	a.className = className;
+	a.innerHTML = innerHTML;
 	
 	return a;
 }

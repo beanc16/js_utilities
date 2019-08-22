@@ -12,6 +12,9 @@ runOnDocumentReady(
 	// Add submit button click functionality
 	() => initializeAllElementClicks(),
 	
+	// Initialize versions displayed in dropdown
+	() => initializeDropdownOptions(),
+	
 	// Add version dropdown functionality
 	() => initializeVersionDropdown(),
 	
@@ -53,6 +56,31 @@ let optionsDictionary = {
 
 // Track all CDN paths based on the version
 let cdnObj = null;
+
+
+
+
+
+/******************
+ * INITIALIZATION *
+ ******************/
+
+function initializeDropdownOptions()
+{
+	let dropdownElement = document.getElementById("versionDropdown");
+	let versionsArray = getDropdownVersions();	// From cdnVersionGetters.js
+	versionsArray.reverse();
+	
+	let aTag;	// Helper variable
+	
+	// Append each version to the dropdown list as an anchor tag
+	for (let i = 0; i < versionsArray.length; i++)
+	{
+		aTag = getAnchorElement(null, "dropdown-item", versionsArray[i]);
+		
+		dropdownElement.insertBefore(aTag, dropdownElement.childNodes[0]);	// Like appendChild, but at the beginning
+	}
+}
 
 
 
@@ -178,7 +206,7 @@ function displaySrcLinks(selectedIds, allOptions)
 	// Add each element that should be displayed to the 
 	for (let i = 0; i < allSrcLinks.length; i++)
 	{
-		let a = getAnchorElement(allSrcLinks[i]);
+		let a = getAnchorElement(allSrcLinks[i], "text-info", allSrcLinks[i]);
 		displayArea.appendChild(a);
 		
 		if (allSrcLinks.length - 1 != i)
@@ -253,7 +281,7 @@ function displayCombinedSrcLink(selectedIds, allOptions)
 		let combinedLink = getCombinedSrcLink(allPaths);
 	
 		// Set the combined link as an element to display
-		let a = getAnchorElement(combinedLink);
+		let a = getAnchorElement(combinedLink, "text-info", combinedLink);
 		displayArea.appendChild(a);
 	}
 }
