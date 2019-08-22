@@ -43,7 +43,7 @@ function nodePostRequest(url, dataKey, data, successFunction)
 	
 	
 	// Convert the data to JSON
-	let data = JSON.stringify({ data });
+	data = JSON.stringify({ data });
 	
 	// Set the data key if it's empty
 	if (dataKey == null)
