@@ -24,6 +24,26 @@ function runOnReady(...functions)
     };
 }
 
+/**
+ * runOnLoad
+ * Summary. 	Same as runOnRead (see above function).
+ *
+ * @param {function} functions
+ */
+function runOnLoad(...functions)
+{
+    // Run when the document is loaded
+	window.onload = function()
+    {
+        // Loop over each given function
+        for (let num = 0; num < functions.length; num++)
+        {
+            // Run the current given function
+            functions[num]();
+        }
+    };
+}
+
 
 
 

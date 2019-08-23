@@ -124,7 +124,7 @@ function disableHtmlElement(tag, shouldDisable)
 }
 
 /**
- * removeElement
+ * removeHtmlElement
  * Summary. Remove the HTML element with the given tag.
  * @param {string}  tag
  */
