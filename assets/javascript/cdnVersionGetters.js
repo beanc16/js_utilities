@@ -10,8 +10,8 @@ function getCdnObjVersions()
 
 function getCdnVersionsV0(cdnObj)
 {
-	// Version 0.2.2
-	cdnObj["0.2.2"] = {
+	// Version 0.2.3
+	cdnObj["0.2.3"] = {
 			// idOnHtmlPage: path
 		
 			// Bootstrap
