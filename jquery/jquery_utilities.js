@@ -134,6 +134,17 @@ function removeHtmlElement(tag)
 	$(tag).remove();
 }
 
+/**
+ * removeJQueryElement
+ * Summary. Call removeHtmlElement().
+ * @param {string}  tag
+ */
+function removeJQueryElement(tag)
+{
+	// Remove the element with the given tag
+	removeHtmlElement(tag);
+}
+
 
 
 

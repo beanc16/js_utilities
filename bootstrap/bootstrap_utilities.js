@@ -1,13 +1,13 @@
-/*************
- * BOOTSTRAP *
- *************/
+/*********************
+ * BOOTSTRAP BUTTONS *
+ *********************/
 
 /**
- * getBootstrapCloseButton
- * Summary. Create a bootstrap close/"x" button.
+ * getBootstrapCloseButtonTemplate
+ * Summary. Create a bootstrap button based on the close template.
  * @returns {*}
  */
-function getBootstrapCloseButton()
+function getBootstrapCloseButtonTemplate(innerHTML, func)
 {
 	/* 
 		Bootstrap Button in HTML:
@@ -20,12 +20,86 @@ function getBootstrapCloseButton()
 	button.className = "close";
 	
 	let span = document.createElement("span");
-	span.innerHTML = "&times;";
+	span.innerHTML = innerHTML;
 	
 	button.appendChild(span);
 	
+	// onclick functionality
+	if (func != null)
+	{
+		button.onclick = () => func();
+	}
+	
 	return button;
 }
+
+/**
+ * getBootstrapCloseButton
+ * Summary. Create a bootstrap close/"x" button.
+ * @returns {*}
+ */
+function getBootstrapCloseButton(func)
+{
+	return getBootstrapCloseButtonTemplate("&times;", func);
+}
+
+/**
+ * getBootstrapAddButton
+ * Summary. Create a bootstrap "+" button.
+ * @returns {*}
+ */
+function getBootstrapAddButton(func)
+{
+	return getBootstrapCloseButtonTemplate("+", func);
+}
+
+/**
+ * getBootstrapPlusButton
+ * Summary. Call getBootstrapAddButton().
+ * @returns {*}
+ */
+function getBootstrapPlusButton(func)
+{
+	return getBootstrapAddButton(func);
+}
+
+/**
+ * getBootstrapRemoveButton
+ * Summary. Create a bootstrap "-" button.
+ * @returns {*}
+ */
+function getBootstrapRemoveButton(func)
+{
+	return getBootstrapCloseButtonTemplate("-", func);
+}
+
+/**
+ * getBootstrapSubtractButton
+ * Summary. Call getBootstrapRemoveButton().
+ * @returns {*}
+ */
+function getBootstrapSubtractButton(func)
+{
+	return getBootstrapRemoveButton(func);
+}
+
+/**
+ * getBootstrapMinusButton
+ * Summary. Call getBootstrapRemoveButton().
+ * @returns {*}
+ */
+function getBootstrapMinusButton(func)
+{
+	return getBootstrapRemoveButton(func);
+}
+
+
+
+
+
+/*********************
+ * BOOTSTRAP TOGGLES *
+ *********************/
 
 /**
  * isToggleOn

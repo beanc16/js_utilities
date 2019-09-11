@@ -48,6 +48,51 @@ function sanitizeStringFromHtml(htmlStr)
 	return htmlStr;
 }
 
+/**
+ * sanitizeStringsFromHtmlArray
+ * Summary. Remove all HTML tags from the given strings.
+ * @param {Array} htmlStrs
+ * @return {Array}
+ */
+function sanitizeStringsFromHtmlArray(htmlStrs)
+{
+    for (let i = 0; i < htmlStrs.length; i++)
+    {
+        htmlStrs[i] = sanitizeStringFromHtml(htmlStrs[i]);
+    }
+
+    return htmlStrs;
+};
+
+/**
+ * sanitizeStringsFromHtmlObject
+ * Summary. Remove all HTML tags from the given strings.
+ * @param {Object} htmlStrObj
+ * @return {Object}
+ */
+function sanitizeStringsFromHtmlObject(htmlStrObj)
+{
+    for (let key in htmlStrObj)
+    {
+        htmlStrObj[key] = sanitizeStringFromHtml(htmlStrObj[key]);
+    }
+
+    return htmlStrObj;
+};
+
+/**
+ * sanitizeStringsFromHtmlRest
+ * Summary. Remove all HTML tags from the given reset parameter.
+ * @param htmlStrs
+ * @return {Array}
+ */
+function sanitizeStringsFromHtmlRest(...htmlStrs)
+{
+	let arrayOfHtmlStrs = Array.from(htmlStrs);
+	
+	return sanitizeStringsFromHtmlArray(arrayOfHtmlStrs);
+}
+
 
 
 
@@ -79,7 +124,7 @@ function isHtmlString(str)
 
 /**
  * isWhitespace
- * Summary. 	Test if the given string is just whitespace.
+ * Summary. Test if the given string is just whitespace.
  * Description. This also tests for "\n" and "\t" and other similar characters.
  * @param {String} str
  * @return {Boolean}
@@ -91,7 +136,7 @@ function isWhitespace(str)
 
 /**
  * isAlphabetic
- * Summary. 	Test if the given string is just alphabetic characters.
+ * Summary. Test if the given string is just alphabetic characters.
  * @param {String} str
  * @return {Boolean}
  */
@@ -102,7 +147,7 @@ function isAlphabetic(str)
 
 /**
  * isNumeric
- * Summary. 	Test if the given string is just numeric characters.
+ * Summary. Test if the given string is just numeric characters.
  * @param {String} str
  * @return {Boolean}
  */
@@ -113,7 +158,7 @@ function isNumeric(str)
 
 /**
  * isEmail
- * Summary. 	Test if the given string is a valid email.
+ * Summary. Test if the given string is a valid email.
  * @param {String} str
  * @return {Boolean}
  */
@@ -132,59 +177,44 @@ function isEmail(str)
 
 /**
  * isAlphabeticWhitespace
- * Summary. 	Test if the given string is just alphabetic & whitespace characters.
+ * Summary. Test if the given string is just alphabetic & whitespace characters.
  * @param {String} str
  * @return {Boolean}
  */
 function isAlphabeticWhitespace(str)
 {
-	if (isAlphabetic(str) && isWhitespace(str))
-	{
-		return true;
-	}
-	
-	return false;
+    return /^[a-zA-Z ]+$/.test(str);
 }
 
 /**
  * isAlphaNumeric
- * Summary. 	Test if the given string is just alphanumeric characters.
+ * Summary. Test if the given string is just alphanumeric characters.
  * @param {String} str
  * @return {Boolean}
  */
 function isAlphaNumeric(str)
 {
-	return /^[0-9a-zA-Z]+$/.test(str);
+    return /^[a-zA-Z0-9]+$/.test(str);
 }
 
 /**
  * isNumericWhitespace
- * Summary. 	Test if the given string is just numeric & whitespace characters.
+ * Summary. Test if the given string is just numeric & whitespace characters.
  * @param {String} str
  * @return {Boolean}
  */
 function isNumericWhitespace(str)
 {
-	if (isNumeric(str) && isWhitespace(str))
-	{
-		return true;
-	}
-	
-	return false;
+    return /^[0-9 ]+$/.test(str);
 }
 
 /**
  * isAlphaNumericWhitespace
- * Summary. 	Test if the given string is just alphanumeric & whitespace characters.
+ * Summary. Test if the given string is just alphanumeric & whitespace characters.
  * @param {String} str
  * @return {Boolean}
  */
 function isAlphaNumericWhitespace(str)
 {
-	if (isAlphaNumeric(str) && isWhitespace(str))
-	{
-		return true;
-	}
-	
-	return false;
+    return /^[a-zA-Z0-9 ]+$/.test(str);
 }
