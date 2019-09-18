@@ -167,6 +167,33 @@ function isEmail(str)
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(str);
 }
 
+/**
+ * isNull
+ * Summary. Test if the given variable is null or not.
+ * @param value
+ * @return {Boolean}
+ */
+function isNull(value)
+{
+    if (value == null)
+    {
+        return true;
+    }
+
+    return false;
+};
+
+/**
+ * isNotNull
+ * Summary. Test if the given variable is null or not.
+ * @param value
+ * @return {Boolean}
+ */
+function isNotNull(value)
+{
+    return !exports.isNull(value);
+};
+
 
 
 
