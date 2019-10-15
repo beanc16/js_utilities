@@ -1,3 +1,39 @@
+/***********
+ * STRINGS *
+ ***********/
+
+/**
+ * indexOfEnd
+ * Description. Edit the default String class to get the index of the 
+ * 				character at the end of a given substring, at the first
+ * 				occurrence of that substring.
+ * @param {string} string
+ * @returns {Number}
+ */
+String.prototype.indexOfEnd = function(string)
+{
+	let io = this.indexOf(string);
+	return io == -1 ? -1 : io + string.length;
+};
+
+/**
+ * lastIndexOfEnd
+ * Description. Edit the default String class to get the index of the 
+ * 				character at the end of a given substring, at the last
+ * 				occurrence of that substring.
+ * @param {string} string
+ * @returns {Number}
+ */
+String.prototype.lastIndexOfEnd = function(string)
+{
+	let io = this.lastIndexOf(string);
+	return io == -1 ? -1 : io + string.length;
+};
+
+
+
+
+
 /*********
  * FORMS *
  *********/

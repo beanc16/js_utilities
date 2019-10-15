@@ -318,6 +318,46 @@ function sortArrayNumeric(array, shouldBeAscending)
 }
 
 /**
+ * sortArrayOfObjectsByProperty
+ * @param {Array} array
+ * @param {String} propertyToSortBy
+ * @param {boolean} shouldBeAscending
+ * @returns {Array}
+ */
+function sortArrayOfObjectsByProperty(array, propertyToSortBy, shouldBeAscending)
+        {
+            // Sort the array in ascending order
+            if (shouldBeAscending == null || shouldBeAscending)
+            {
+                array.sort(function (a, b)
+                {
+                    if (a[propertyToSortBy] > b[propertyToSortBy])
+                    {
+                        return 1;
+                    }
+
+                    return -1;
+                });
+            }
+
+            // Sort the array in descending order
+            if (!shouldBeAscending)
+            {
+                array.sort(function(a, b)
+                {
+                    if (a[propertyToSortBy] < b[propertyToSortBy])
+                    {
+                        return 1;
+                    }
+
+                    return -1;
+                });
+            }
+
+            return array;
+        }
+
+/**
  * randomizeArray
  * @param {Array} array
  * @returns {Array}
