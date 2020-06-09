@@ -30,6 +30,34 @@ String.prototype.lastIndexOfEnd = function(string)
 	return io == -1 ? -1 : io + string.length;
 };
 
+/**
+ * getRandomString
+ * @param {string} strLength
+ * @returns {string}
+ */
+function getRandomString(strLength)
+{
+    // Helpers
+    let result = "";
+    let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    let charactersLength = characters.length;
+    let index = null;
+	
+	// Get a strLength of 1-10 characters if no strLength is given
+	if (strLength == null)
+	{
+		strLength = Math.ceil(Math.random() * 10);
+	}
+
+    for (let i = 0; i < strLength; i++)
+    {
+        index = Math.floor(Math.random() * charactersLength);
+        result += characters.charAt(index);
+    }
+
+    return result;
+}
+
 
 
 

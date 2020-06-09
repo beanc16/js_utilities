@@ -260,6 +260,50 @@ function arrayHasGivenElement(array, element)
     return false;
 }
 
+/**
+ * arrayOfObjectsHasKey
+ * @param {Array} array
+ * @param keyToCheck
+ * @returns {boolean}
+ */
+function arrayOfObjectsHasKey(array, keyToCheck)
+{
+	for (let i = 0; i < array.length; i++)
+	{
+		// An object with the given key DOES exist
+		if (array[i][keyToCheck] != null)
+		{
+			return true;
+		}
+	}
+	
+	// An object with the given key DOES NOT exist
+	return false;
+}
+
+/**
+ * arrayOfObjectsHasValue
+ * @param {Array} array
+ * @param keyToCheck
+ * @param valueToCompare
+ * @returns {boolean}
+ */
+function arrayOfObjectsHasValue(array, keyToCheck, valueToCompare)
+{
+	for (let i = 0; i < array.length; i++)
+	{
+		// An object with the given value at the given key DOES exist
+		if (array[i][keyToCheck] == valueToCompare)
+		{
+			return true;
+		}
+	}
+
+	// An object with the given value at the given key DOES NOT exist
+	return false;
+}
+
+
 
 
 
@@ -325,37 +369,37 @@ function sortArrayNumeric(array, shouldBeAscending)
  * @returns {Array}
  */
 function sortArrayOfObjectsByProperty(array, propertyToSortBy, shouldBeAscending)
-        {
-            // Sort the array in ascending order
-            if (shouldBeAscending == null || shouldBeAscending)
-            {
-                array.sort(function (a, b)
-                {
-                    if (a[propertyToSortBy] > b[propertyToSortBy])
-                    {
-                        return 1;
-                    }
+{
+	// Sort the array in ascending order
+	if (shouldBeAscending == null || shouldBeAscending)
+	{
+		array.sort(function (a, b)
+		{
+			if (a[propertyToSortBy] > b[propertyToSortBy])
+			{
+				return 1;
+			}
 
-                    return -1;
-                });
-            }
+			return -1;
+		});
+	}
 
-            // Sort the array in descending order
-            if (!shouldBeAscending)
-            {
-                array.sort(function(a, b)
-                {
-                    if (a[propertyToSortBy] < b[propertyToSortBy])
-                    {
-                        return 1;
-                    }
+	// Sort the array in descending order
+	if (!shouldBeAscending)
+	{
+		array.sort(function(a, b)
+		{
+			if (a[propertyToSortBy] < b[propertyToSortBy])
+			{
+				return 1;
+			}
 
-                    return -1;
-                });
-            }
+			return -1;
+		});
+	}
 
-            return array;
-        }
+	return array;
+}
 
 /**
  * randomizeArray

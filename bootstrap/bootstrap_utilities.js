@@ -117,19 +117,27 @@ function getBootstrapMinusButton(func)
  */
 function isToggleOn(toggleElement)
 {
-	// The toggle was turned on
-	if (toggleElement.className.includes("btn-success"))
-	{
-		return true;
-	}
-	
-	// The toggle was turned off
-	else if (toggleElement.className.includes("btn-danger off"))
-	{
-		return false;
-	}
-	
-	return null;
+    // Has "off" if it's turned off
+    return !toggleElement.className.includes("off");
+}
+
+/**
+ * isToggleOff
+ * Summary. Test if a bootstrap toggle was turned on or off.
+ * Description. WARNING: If you are running this function when the 
+ *				toggle is clicked, call wasToggleTurnedOn() instead.
+ *				Documentation on the bootstrap toggle add-on can be
+ * 				found here:
+ * 					Bootstrap 4:
+ * 					https://gitbrent.github.io/bootstrap4-toggle
+ * 					Bootstrap <=3:
+ * 					http://www.bootstraptoggle.com
+ * @param toggleElement
+ * @returns {*}
+ */
+function isToggleOff(toggleElement)
+{
+    return !isToggleOn(toggleElement);
 }
 
 
@@ -140,6 +148,7 @@ function isToggleOn(toggleElement)
  *				when a toggle is clicked. If this function 
  * 				isn't being ran when the toggle is clicked, 
  * 				just call isToggleOn() instead.
+ * 				
  *				Documentation on the bootstrap toggle add-on can be
  * 				found here:
  * 					Bootstrap 4:
@@ -155,6 +164,29 @@ function wasToggleTurnedOn(toggleElement)
 	{
 		return isToggleOn(toggleElement);
 	}, 1);
+}
+
+
+/**
+ * wasToggleTurnedOff
+ * Summary. Test if a bootstrap toggle was turned on or off.
+ * Description. WARNING: This function is intended to be ran 
+ *				when a toggle is clicked. If this function 
+ * 				isn't being ran when the toggle is clicked, 
+ * 				just call isToggleOn() instead.
+ * 				
+ *				Documentation on the bootstrap toggle add-on can be
+ * 				found here:
+ * 					Bootstrap 4:
+ * 					https://gitbrent.github.io/bootstrap4-toggle
+ * 					Bootstrap <=3:
+ * 					http://www.bootstraptoggle.com
+ * @param toggleElement
+ * @returns {*}
+ */
+function wasToggleTurnedOff(toggleElement)
+{
+	return !wasToggleTurnedOn(toggleElement);
 }
 
 /**
